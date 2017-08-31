@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+		<base href="/esf/">
+		
+	    <title>Интеграции с системой ЭСФ</title>
+	
+	    <link href="content/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="content/css/main.css" rel="stylesheet">
+	    <link href="content/css/login.css" rel="stylesheet">
+	 	<link href="content/angular-material/angular-material.min.css" rel="stylesheet">
+	    
+	    <script src="content/bootstrap/js/jquery-1.12.3.min.js"></script>
+	    <script src="content/bootstrap/js/bootstrap.min.js"></script>
+	    <script src="content/angular/angular.min.js"></script>
+	    <script src="content/angular/angular-resource.js"></script>
+	    <script src="content/angular/angular-route.min.js"></script>
+	    <script src="content/angular/angular-animate.min.js"></script>
+	    <script src="content/angular/angular-touch.js"></script>
+	    <script src="content/angular/angular-aria.min.js"></script>
+	    <script src="content/angular/angular-messages.min.js"></script>
+	    <script src="content/bootstrap-ui/ui-bootstrap-tpls-1.3.2.min.js"></script>	    
+	    <script src="content/angular-material/angular-material.min.js">
+	    
+	    
+		<!--common modules -->
+	    <script src="common/common.js"></script>
+	    
+	    <!--filters -->
+	    <script src="common/filters/filters.js"></script>	    
+	    
+	    <!--directives -->
+	    <script src="common/directives/formControl/formControl.js"></script>
+	    <script src="common/directives/complexView/complexView.js"></script>
+	    <script src="common/directives/complexView/complexViewSearch/complexViewSearch.js"></script>
+	    <script src="common/directives/complexView/complexViewTable/complexViewTable.js"></script>
+	    <script src="common/directives/complexFormControl/complexFormControl.js"></script>
+	    <script src="common/directives/complexFormControl/control/control.js"></script>
+	    <script src="common/directives/breadcrumb/breadcrumb.js"></script>
+	    <script src="common/directives/treeView/treeView.js"></script>
+	    <script src="common/directives/form/form.js"></script>
+	    <script src="common/directives/fileModel.js"></script>
+	    	    
+	    <!--dialogs -->
+	    <script src="common/dialogs/confirmDelete/confirmDeleteCtrl.js"></script>
+		<script src="common/dialogs/alert/alertCtrl.js"></script>
+		<script src="common/dialogs/confirmYesNo/confirmYesNoCtrl.js"></script> 	
+				
+		<!--services -->
+	    <script src="common/services/stateService.js"></script>
+	    <script src="common/services/accessControl.js"></script>
+	    <script src="common/services/builderService.js"></script>
+	    <script src="common/services/handleActionService.js"></script>
+	    <script src="common/services/descriptionServiceHelper.js"></script>
+	    
+	    	    
+	    <!--app module-->
+	    <script src="app.js"></script>
+	    <script src="appController.js"></script>
+	    	
+	    <!--ar module -->
+	  	<script src="ar/arApp.js"></script>
+	    <script src="ar/arController.js"></script>	    
+	    <script src="ar/features/ar_invoices/controllers/arInvoiceListCtrl.js"></script>
+	    <script src="ar/features/ar_invoices/controllers/arInvoiceEditCtrl.js"></script>
+	    <script src="ar/features/ar_invoices/models/arDataServices.js"></script>
+	    <script src="ar/features/ar_invoices/models/arInvoiceDescriptionService.js"></script>
+
+
+	    <!--ap module -->
+	  	<script src="ap/apApp.js"></script>
+	    <script src="ap/apController.js"></script>	    
+	    <script src="ap/features/ap_invoices/controllers/apInvoiceListCtrl.js"></script>
+	    <script src="ap/features/ap_invoices/controllers/apInvoiceEditCtrl.js"></script>
+	    <script src="ap/features/ap_invoices/models/apDataServices.js"></script>
+	    <script src="ap/features/ap_invoices/models/apInvoiceDescriptionService.js"></script>
+	    
+		
+		<script type="text/javascript">		
+			if (!String.prototype.startsWith) {
+			  String.prototype.startsWith = function(searchString, position) {
+			    position = position || 0;
+			    return this.indexOf(searchString, position) === position;
+			  };
+			}		
+		</script>   	    		
+	</head>
+
+	<body>
+		
+		
+		<div id=wrapper ng-controller="appController">
+
+	        <!-- Header -->
+		    <div class="panel panel-primary" ng-if="!data.auth.isAuth">
+		
+		        <!-- Applivation Header -->
+		        <div class="panel-heading">
+		            {{data.app.header}}
+		        </div>
+		    </div>
+			        
+		    <form class="form-signin" ng-show="!data.auth.isAuth" >       
+		      <h2 class="form-signin-heading">Вход в систему</h2>
+		      
+		      <input 
+		      	type="text" 
+		      	class="form-control" 
+		      	name="username" 
+		      	placeholder="Учетная запись" 
+		      	required="" 
+		      	autofocus=""
+		      	ng-model="data.auth.user" 
+		      />
+		      <br/>
+		      
+		      <input 
+		      	type="password" 
+		      	class="form-control" 
+		      	name="password" 
+		      	placeholder="Пароль" 
+		      	required=""
+		      	ng-model="data.auth.pass"
+		      />
+		      <br/>      
+		      <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login()">Вход</button>   
+			  
+			  <br/>	
+	       	  <div class="alert alert-danger" ng-show="data.error">
+		      	{{data.error.data.errMsg}}
+		      </div>
+		    </form>		    
+		    
+
+        		    
+		    
+		    <div ng-if="data.auth.isAuth">
+		        
+		        <!-- Header -->
+			    <div class="panel panel-primary">
+			
+			        <!-- Applivation Header -->
+			        <div class="panel-heading">
+			            {{data.app.header}}
+						<span>
+							<a id="cmdFullScreen" ng-click="data.fullScreen=!data.fullScreen" class="btn btn-primary btn-sm pull-right">
+								<span ng-class="data.fullScreen ? 'glyphicon glyphicon-option-horizontal' : 'glyphicon glyphicon-fullscreen'"
+			                             uib-tooltip="Полноэкранный режим" tooltip-placement="bottom">
+								</span>
+							</a> 
+						</span>
+			        </div>
+			
+			        <!-- Current User Info -->
+			        <div class="panel-body" ng-show="!data.fullScreen">
+				      	<span class="badge">
+				      		Текущий пользователь: {{data.auth.user}} <br/>
+				      	</span>
+						
+				      	<span class="badge">
+				      		Текущие полномочия: {{data.auth.currentResp.name}} <br/>
+				      	</span>
+
+						<button class="btn btn-primary pull-right btn-sm RbtnMargin" type="button" ng-click="logout()">Выход</button>
+			        </div>
+			    </div>
+			
+				
+				<md-content class="md-padding" ng-show="!data.fullScreen">
+				  <md-nav-bar
+				    md-selected-nav-item="data.app.current"
+				    nav-bar-aria-label="Меню приложения">
+					
+					<md-nav-item md-nav-click="goto(item.name)" name="{{item.name}}" ng-repeat="item in data.app.topMenu">
+						<span style="white-space: pre-wrap">{{item.desc}}</span>
+					</md-nav-item>
+				  				    
+				  </md-nav-bar>
+				</md-content>
+				 
+				
+				<div ng-if="data.app.current=='ar'">
+					<div layout="row" ng-controller="arController">
+					  
+					  <div flex="20" ng-show="!data.fullScreen" style="margin-right: 15px; margin-top: 10px;">
+					    <md-content>
+					      <md-list flex>
+					        <md-subheader class="md-no-sticky">Выберите категорию</md-subheader>						        
+					        <md-list-item class="md-3-line" ng-repeat="item in menu.nodes" ng-click="onSelectedMenu(item.name)">
+					          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.desc}}" />
+					          <div class="md-list-item-text" layout="column">
+					            <h3>{{item.desc}}</h3>
+					            <p>{{item.notes}}</p>
+					          </div>
+					        </md-list-item>						        
+					      </md-list>
+					    </md-content>					  
+					  </div>
+					  
+					  <div flex="data.fullScreen ? '100': '20'" style="margin-top: 10px;"">
+			          	<div ng-view class="ngFade" autoscroll="true"></div>
+					  </div>				
+					</div>
+				</div>				
+				
+				
+				<div ng-if="data.app.current=='ap'">
+					<div layout="row" ng-controller="apController">
+					  
+					  <div flex="20" ng-show="!data.fullScreen" style="margin-right: 15px; margin-top: 10px;">
+					    <md-content>
+					      <md-list flex>
+					        <md-subheader class="md-no-sticky">Выберите категорию</md-subheader>						        
+					        <md-list-item class="md-3-line" ng-repeat="item in menu.nodes" ng-click="onSelectedMenu(item.name)">
+					          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.desc}}" />
+					          <div class="md-list-item-text" layout="column">
+					            <h3>{{item.desc}}</h3>
+					            <p>{{item.notes}}</p>
+					          </div>
+					        </md-list-item>						        
+					      </md-list>
+					    </md-content>					  
+					  </div>
+					  
+					  <div flex="data.fullScreen ? '100': '20'" style="margin-top: 10px;"">
+			          	<div ng-view class="ngFade" autoscroll="true"></div>
+					  </div>				
+					</div>
+				</div>					
+				
+				<!-- ar application 
+			    <div class="panel panel-default" ng-if="data.app.current=='ar'">
+			        <div class="row" ng-controller="arController">
+						
+						<div class="col-xs-2" ng-show="!data.fullScreen" style="margin-top: 10px;" flex-gt-sm="50" flex>
+						    <md-content>
+						      <md-list flex>
+						        <md-subheader class="md-no-sticky">Выберите категорию</md-subheader>						        
+						        <md-list-item class="md-3-line" ng-repeat="item in menu.nodes" ng-click="onSelectedMenu(item.name)">
+						          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.desc}}" />
+						          <div class="md-list-item-text" layout="column">
+						            <h3>{{ item.desc }}</h3>
+						            <p>{{ item.notes }}</p>
+						          </div>
+						        </md-list-item>						        
+						      </md-list>
+						    </md-content>				    
+					  	</div>
+	
+			            <div ng-class="data.fullScreen ? 'col-xs-12': 'col-xs-10'" style="margin-top: 10px;">
+			                <div ng-view class="ngFade" autoscroll="true"></div>
+			            </div>
+			        </div>
+			    </div>
+			    
+			    
+				<!-- ap application  
+			    <div class="panel panel-default" ng-if="data.app.current=='ap'">
+			        <div class="row" ng-controller="apController">
+						
+						<div class="col-xs-2" ng-show="!data.fullScreen" style="margin-top: 10px;" flex-gt-sm="50" flex>
+						    <md-content>
+						      <md-list flex>
+						        <md-subheader class="md-no-sticky">Выберите категорию</md-subheader>						        
+						        <md-list-item class="md-3-line" ng-repeat="item in menu.nodes" ng-click="onSelectedMenu(item.name)">
+						          <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.desc}}" />
+						          <div class="md-list-item-text" layout="column">
+						            <h3>{{ item.desc }}</h3>
+						            <p>{{ item.notes }}</p>
+						          </div>
+						        </md-list-item>						        
+						      </md-list>
+						    </md-content>
+					  	</div>
+	
+			            <div ng-class="data.fullScreen ? 'col-xs-12': 'col-xs-10'" style="margin-top: 10px;">
+			                <div ng-view class="ngFade" autoscroll="true"></div>
+			            </div>
+			        </div>
+			    </div>
+			    -->
+			    			    
+		    </div>			    			    			    
+		</div>
+		
+	</body>
+</html>

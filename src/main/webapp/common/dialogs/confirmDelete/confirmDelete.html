@@ -1,0 +1,30 @@
+<form name="frmConfirmDelete" novalidate>
+
+    <div class="modal-header">
+        <h3 class="modal-title">Удаление</h3>
+    </div>
+        
+		
+	<!-- Form Edit -->	
+	<div class="modal-body">
+		Вы уверены что хотите удалить запись?					
+	</div>
+
+	<div class="modal-footer">
+		<!-- Yes -->
+		<input type="button" 
+		        id="cmdYes"
+		        value="Да" 
+		        class="btn btn-primary btn-sm" 
+		        ng-click="yes()"
+		/>
+		
+		<!-- No -->
+		<input type="button" 
+		        id="cmdNo"
+		        value="Нет" 
+		        class="btn btn-warning btn-sm" 
+		        ng-click="no()"
+		/>
+	</div>		                		
+</form>

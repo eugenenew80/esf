@@ -1,0 +1,11 @@
+<table class="table table-condensed" style="margin-bottom: 0;">	
+	<tr ng-repeat="item in currentElement[control.name]">
+	
+		<td>
+			<label class="checkbox-inline">
+				<input type="checkbox" ng-model="item.checked">
+				{{ item.name }}
+			</label>
+		</td>
+	</tr>
+</table>

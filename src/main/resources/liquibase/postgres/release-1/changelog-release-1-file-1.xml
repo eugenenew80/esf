@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    
+    <changeSet id="1" author="eugene" context="postgres">
+    	<comment>Creating schema</comment>        
+	    <sql dbms="postgresql" endDelimiter=";">
+	        CREATE SCHEMA apps
+	    </sql>    
+	    
+		<rollback>
+		    <sql dbms="postgresql" endDelimiter=";">
+		        DROP SCHEMA apps
+		    </sql>    
+        </rollback>	
+    </changeSet>
+
+    <changeSet id="2" author="eugene" context="postgres">        
+        <comment>Creating table: xx_customer</comment>
+        <createTable tableName="xx_customer" schemaName="apps">            
+            <column name="id" type="number">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+                       
+            <column name="tin" type="varchar(12)">
+                <constraints nullable="false"/>
+            </column>
+                        
+            <column name="rnn" type="varchar(12)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="address" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="country_code" type="varchar(3)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="trailer" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="status" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+	<changeSet id="3" author="eugene" context="postgres"> 
+	    <comment>Creating primary key for table: xx_customer</comment>
+	    <addPrimaryKey 
+	            columnNames="id"
+	            constraintName="pk_xx_customer"
+	            schemaName="apps"
+	            tableName="xx_customer"/>
+	</changeSet>
+
+	<changeSet id="4" author="eugene" context="postgres">
+		<comment>Load demo data to table: xx_customer</comment>
+	    <loadData
+	            encoding="UTF-8"
+	            file="/src/main/resources/liquibase/postgres/release-1/data/xx_customer.csv"
+	            quotchar="'"
+	            schemaName="apps"
+	            separator=";"
+	            tableName="xx_customer">
+	        
+	        <column name="id" 		type="NUMERIC"/>
+	        <column name="name" 	type="STRING"/>
+	        <column name="tin" 		type="STRING"/>
+	        <column name="rnn" 		type="STRING"/>
+	        <column name="address" 	type="STRING"/>
+	    </loadData>
+		
+		<rollback>
+        	<delete schemaName="apps" tableName="xx_customer" />
+        </rollback>	
+	</changeSet>	
+
+
+    <changeSet id="5" author="eugene" context="postgres">        
+        <comment>Creating table: xx_ap_vendor</comment>
+        <createTable tableName="xx_ap_vendor" schemaName="apps">            
+            <column name="id" type="number">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="name" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+                       
+            <column name="tin" type="varchar(12)">
+                <constraints nullable="false"/>
+            </column>
+            
+            <column name="rnn" type="varchar(12)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="address" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="country_code" type="varchar(3)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="trailer" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="status" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+	<changeSet id="6" author="eugene" context="postgres"> 
+	    <comment>Creating primary key for table: xx_ap_vendor</comment>
+	    <addPrimaryKey 
+	            columnNames="id"
+	            constraintName="pk_xx_ap_vendor"
+	            schemaName="apps"
+	            tableName="xx_ap_vendor"/>
+	</changeSet>
+
+
+	<changeSet id="7" author="eugene" context="postgres">
+		<comment>Load demo data to table: xx_ap_vendor</comment>
+	    <loadData
+	            encoding="UTF-8"
+	            file="/src/main/resources/liquibase/postgres/release-1/data/xx_ap_vendor.csv"
+	            quotchar="'"
+	            schemaName="apps"
+	            separator=";"
+	            tableName="xx_ap_vendor">
+	        
+	        <column name="id" 		type="NUMERIC"/>
+	        <column name="name" 	type="STRING"/>
+	        <column name="tin" 		type="STRING"/>
+	        <column name="rnn" 		type="STRING"/>
+	        <column name="address" 	type="STRING"/>
+	    </loadData>
+		
+		<rollback>
+        	<delete schemaName="apps" tableName="xx_ap_vendor" />
+        </rollback>	
+	</changeSet>
+
+
+    <changeSet id="8" author="eugene" context="postgres">        
+        <comment>Creating table: xx_company</comment>
+        <createTable tableName="xx_company" schemaName="apps">            
+            <column name="id" type="number">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="name" type="varchar(300)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="tin" type="varchar(12)">
+                <constraints nullable="false"/>
+            </column>
+                        
+            <column name="rnn" type="varchar(12)">
+                <constraints nullable="true"/>
+            </column>
+                       
+            <column name="address" type="varchar(500)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="trailer" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="bank" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="bik" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="certificate_num" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="certificate_series" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="delivery_doc_date" type="date">
+                <constraints nullable="true"/>
+            </column>  
+            
+            <column name="delivery_doc_num" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="iik" type="varchar(30)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="kbe" type="varchar(2)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+	<changeSet id="9" author="eugene" context="postgres"> 
+	    <comment>Creating primary key for table: xx_company</comment>
+	    <addPrimaryKey 
+	            columnNames="id"
+	            constraintName="pk_xx_company"
+	            schemaName="apps"
+	            tableName="xx_company"/>
+	</changeSet>
+	
+	<changeSet id="10" author="eugene" context="postgres">
+		<comment>Load demo data to table: xx_company</comment>
+	    <loadData
+	            encoding="UTF-8"
+	            file="/src/main/resources/liquibase/postgres/release-1/data/xx_company.csv"
+	            quotchar="'"
+	            schemaName="apps"
+	            separator=";"
+	            tableName="xx_company">
+	        
+	        <column name="id" 		type="NUMERIC"/>
+	        <column name="name" 	type="STRING"/>
+	        <column name="tin" 		type="STRING"/>
+	        <column name="rnn" 		type="STRING"/>
+	        <column name="address" 	type="STRING"/>
+	    </loadData>
+		
+		<rollback>
+        	<delete schemaName="apps" tableName="xx_company" />
+        </rollback>	
+	</changeSet>	
+	
+	<changeSet id="11" author="eugene" context="postgres">
+	    <comment>Creating sequence for table: xx_company</comment>
+	    <createSequence 
+	            incrementBy="1"
+	            schemaName="apps"
+	            sequenceName="xx_company_s"
+	            startValue="4"/>
+	</changeSet>	
+	
+    <changeSet id="12" author="eugene" context="postgres">        
+        <comment>Creating table: xx_customer_site</comment>
+        <createTable tableName="xx_customer_site" schemaName="apps">            
+            <column name="customer_site_id" type="number">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="site_date" type="date">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="site_num" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+                        
+            <column name="destination" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+                       
+            <column name="exercise_way" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="term" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="customer_id" type="number">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+	</changeSet>
+	
+	<changeSet id="13" author="eugene" context="postgres"> 
+	    <comment>Creating primary key for table: xx_customer_site</comment>
+	    <addPrimaryKey 
+	            columnNames="customer_site_id"
+	            constraintName="pk_xx_customer_site"
+	            schemaName="apps"
+	            tableName="xx_customer_site"/>
+	</changeSet>
+
+	<changeSet id="14" author="eugene" context="postgres">
+		<comment>Load demo data to table: xx_customer_site</comment>
+	    <loadData
+	            encoding="UTF-8"
+	            file="/src/main/resources/liquibase/postgres/release-1/data/xx_customer_site.csv"
+	            quotchar="'"
+	            schemaName="apps"
+	            separator=";"
+	            tableName="xx_customer_site">
+	        
+	        <column name="customer_site_id" type="NUMERIC"/>
+	        <column name="site_date" 		type="DATE"/>
+	        <column name="site_num" 		type="STRING"/>
+	        <column name="customer_id" 		type="NUMERIC"/>
+	    </loadData>
+		
+		<rollback>
+        	<delete schemaName="apps" tableName="xx_customer_site" />
+        </rollback>	
+	</changeSet>
+
+	<changeSet id="15" author="eugene" context="postgres">
+	    <comment>Creating sequence for table: xx_customer_site</comment>
+	    <createSequence 
+	            incrementBy="1"
+	            schemaName="apps"
+	            sequenceName="xx_customer_site_s"
+	            startValue="4"/>
+	</changeSet>	
+
+</databaseChangeLog>

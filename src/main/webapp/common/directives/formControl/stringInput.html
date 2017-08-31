@@ -1,0 +1,21 @@
+<div class="form-group row">
+	<label for="{{formControl.name}}" class="control-label" ng-class="formControl.labelClasses || 'col-sm-5'">
+		{{formControl.desc}}:
+	</label>
+	
+	<div ng-class="formControl.classes || 'col-sm-7'">
+		<input id="{{formControl.id}}" 
+			name="{{formControl.name}}" 
+			type="text" 
+			class="form-control" 
+			ng-required="formControl.required" 
+			ng-model="currentElement[formControl.model]" 
+		/>
+		
+		<div class="error" ng-show="form[formControl.name].$invalid && form[formControl.name].$dirty">
+			<span ng-show="form[formControl.name].$error.required">
+				Поле является обязательным
+			</span>				
+		</div>				
+	</div>
+</div>

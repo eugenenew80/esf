@@ -1,0 +1,9 @@
+<textarea id="{{control.name}}" 
+	name="{{control.controlName}}" 
+	class="form-control" 
+	rows="2"
+	ng-required="control.required" 
+	ng-model="currentElement[control.name]"
+	ng-readonly="!control.editable"
+>
+</textarea>

@@ -1,0 +1,41 @@
+<form id="frmComplexForm" class="form-horizontal" novalidate>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+	        <span>
+	        	{{config.desc || config.header}}
+				
+				<a id="cmdCollapse" ng-show="config.collapsable" ng-click="config.isCollapse=!config.isCollapse" class="btn btn-deafult btn-sm pull-right" uib-tooltip="свернуть/развернуть">
+					<span ng-class="config.isCollapse ? 'glyphicon glyphicon-triangle-bottom' : 'glyphicon glyphicon-triangle-top'">
+					</span>
+				</a> 	        	
+	        </span>
+        </div>
+	</div>
+
+			 	
+ 	<div class="modal-body" ng-show="!config.isCollapse" >
+		<div ng-repeat="field in config.fields | filter:{visible:true}">
+			<complex-form-control 
+						element="model"
+						form="frmComplexForm"
+						field="field"							
+			>
+			</complex-form-control>		
+		</div>
+ 	</div>
+ 	
+	<div class="modal-footer" ng-show="!config.isCollapse">
+		<button ng-repeat="action in config.actions"
+				id="{{action.action}}"
+				class="{{action.button.classes}}"
+				style="{{action.button.style}}"
+				ng-click="handle(action)"
+				ng-disabled="action.button.disabled"
+				uib-tooltip="{{action.button.tooltip}}"
+		>
+			{{action.button.desc}}
+			<span class="{{action.button.glyphicon}}"></span>
+		</button>
+	</div>
+</form>

@@ -1,0 +1,9 @@
+package esf.entity;
+
+public enum EnterpriseType {
+	NOT_SET,
+	INDIVIDUAL,
+	INDIVIDUAL_ENTREPRENEUR,
+	PRIVATE_ENTERPRISE,
+	STATE_ENTERPRISE;
+}

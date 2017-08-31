@@ -1,0 +1,21 @@
+<form name="frmAlert" novalidate>
+
+    <div class="modal-header">
+        <h4 class="modal-title">Сообщение</h4>
+    </div>
+        		
+	<!-- Form Edit -->	
+	<div class="modal-body">
+		{{text}}				
+	</div>
+
+	<div class="modal-footer">
+		<!-- Yes -->
+		<input type="button" 
+		        id="cmdOk"
+		        value="Ок" 
+		        class="btn btn-primary btn-sm" 
+		        ng-click="ok()"
+		/>
+	</div>		                		
+</form>

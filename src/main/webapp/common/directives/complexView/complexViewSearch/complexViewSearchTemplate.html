@@ -1,0 +1,63 @@
+<form id="frmComplexViewSearch" class="form-horizontal" novalidate>
+	
+    <div class="panel panel-default">
+        <div class="panel-heading">
+	        <span>
+	        	Панель фильтров
+				
+				<a ng-click="data.state.isSearchOpened=!data.state.isSearchOpened" class="btn btn-deafult btn-sm pull-right" uib-tooltip="свернуть/развернуть">
+					<span ng-class="data.state.isSearchOpened ? 'glyphicon glyphicon-triangle-top' : 'glyphicon glyphicon-triangle-bottom'">
+					</span>
+				</a> 	        	
+	        </span>
+        </div>
+	</div>
+
+			 	
+ 	<div class="modal-body" ng-show="data.state.isSearchOpened" >
+		
+		
+		<div ng-repeat="field in complexView.config.search.fields | filter: {visible: true}">
+			<complex-form-control 
+						element="data.state.search"
+						form="frmComplexViewSearch"
+						field="field"							
+			>
+			</complex-form-control>		
+		</div>	
+
+				
+		<div class="form-group row">
+			<label for="txtRowsPerPage" ng-class="complexView.config.search.labelRowsPerPageClass">
+				Строк на странице:
+			</label>
+			
+			<div class="col-sm-2">
+				<input id="txtRowsPerPage" 
+						name="txtRowsPerPage" 
+						type="number"
+						class="form-control"  
+						ng-model="data.state.rowsPerPage" 
+				/>
+			</div>
+		</div>								
+ 	</div>	 	
+ 	
+	<div class="modal-footer"  ng-show="data.state.isSearchOpened">
+		
+		<!-- Clear data -->
+		<a ng-click="clearFilter()" class="btn btn-warning btn-sm">
+			Очистить
+			<span class="glyphicon glyphicon-off"></span>
+		</a> 
+					
+		<!-- Requey data -->
+		<a ng-click="reload()" 
+			class="btn btn-primary btn-sm"
+			ng-disabled="frmComplexViewSearch.$invalid || frmComplexViewSearch.$pristine"
+		>
+			Применить
+			<span class="glyphicon glyphicon-search"></span>
+		</a> 
+	</div>		 	
+</form>

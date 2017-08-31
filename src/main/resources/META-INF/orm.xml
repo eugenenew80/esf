@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+	
+	
+	<entity class="esf.entity.Customer">
+		<table name="xx_customer" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="id" />
+			</id>
+
+      		<basic name="address">
+      			<column name="address" />
+      		</basic>
+
+      		<basic name="name">
+      			<column name="name" />
+      		</basic>
+
+      		<basic name="rnn">
+      			<column name="rnn" />
+      		</basic>
+      		
+      		<basic name="tin">
+      			<column name="tin" />
+      		</basic>
+      		
+      		<basic name="countryCode">
+      			<column name="country_code" />
+      		</basic> 
+      		
+      		<basic name="trailer">
+      			<column name="trailer" />
+      		</basic>  
+      		
+      		<basic name="status">
+      			<column name="status" />
+      			<enumerated>STRING</enumerated>
+      		</basic>       		     		     		
+		</attributes>
+	</entity>	
+
+
+	<entity class="esf.entity.Vendor">
+		<table name="xx_ap_vendor" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="id" />
+			</id>
+
+      		<basic name="address">
+      			<column name="address" />
+      		</basic>
+
+      		<basic name="name">
+      			<column name="name" />
+      		</basic>
+
+      		<basic name="rnn">
+      			<column name="rnn" />
+      		</basic>
+      		
+      		<basic name="tin">
+      			<column name="tin" />
+      		</basic>
+      		
+      		<basic name="countryCode">
+      			<column name="country_code" />
+      		</basic> 
+      		
+      		<basic name="trailer">
+      			<column name="trailer" />
+      		</basic>  
+      		
+      		<basic name="status">
+      			<column name="status" />
+      			<enumerated>STRING</enumerated>
+      		</basic>       		     		     		
+		</attributes>
+	</entity>	
+	
+	<entity class="esf.entity.Company">
+		<table name="xx_company" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="id" />
+        		<generated-value strategy="SEQUENCE" generator="xx_company_gen" />
+        		<sequence-generator
+        			name="xx_company_gen"
+        			sequence-name="xx_company_s"
+					schema="apps"
+					allocation-size="1"
+        		/>				
+			</id>
+
+      		<basic name="address">
+      			<column name="address" />
+      		</basic>
+
+      		<basic name="name">
+      			<column name="name" />
+      		</basic>
+
+      		<basic name="tin">
+      			<column name="tin" />
+      		</basic>
+      		
+      		<basic name="rnn">
+      			<column name="rnn" />
+      		</basic>
+
+      		<basic name="trailer">
+      			<column name="trailer" />
+      		</basic>
+
+      		<basic name="bank">
+      			<column name="bank" />
+      		</basic>
+
+      		<basic name="bik">
+      			<column name="bik" />
+      		</basic>
+
+      		<basic name="certificateNum">
+      			<column name="certificate_num" />
+      		</basic>
+
+      		<basic name="certificateSeries">
+      			<column name="certificate_series" />
+      		</basic>      		      		      		      		      		      		
+
+      		<basic name="deliveryDocDate">
+      			<column name="delivery_doc_date" />
+      		</basic>      		      		      		      		      		      		
+
+      		<basic name="deliveryDocNum">
+      			<column name="delivery_doc_num" />
+      		</basic> 
+      		
+      		<basic name="iik">
+      			<column name="iik" />
+      		</basic> 
+
+      		<basic name="kbe">
+      			<column name="kbe" />
+      		</basic> 
+		</attributes>
+	</entity>
+	
+	
+	<entity class="esf.entity.invoice.ar.ArDeliveryItem">
+		<table name="xx_customer_site" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="customer_site_id" />
+        		<generated-value strategy="SEQUENCE" generator="xx_customer_site_gen" />
+        		<sequence-generator
+        			name="xx_customer_site_gen"
+        			sequence-name="xx_customer_site_s"
+					schema="apps"
+					allocation-size="1"
+        		/>					
+			</id>
+
+      		<basic name="contractDate">
+      			<column name="site_date" />
+      		</basic>
+
+      		<basic name="contractNum">
+      			<column name="site_num" />
+      		</basic>
+
+      		<basic name="destination">
+      			<column name="destination" />
+      		</basic>
+      		
+      		<basic name="exerciseWay">
+      			<column name="exercise_way" />
+      		</basic>
+      		
+      		<basic name="term">
+      			<column name="term" />
+      		</basic>     		     		     		
+		</attributes>
+	</entity>	
+	
+	
+	<entity class="esf.entity.invoice.ar.ArProduct">
+		<table name="xx_ar_invoice_line" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="customer_trx_line_id" />
+			</id>
+
+      		<basic name="description">
+      			<column name="description" />
+      		</basic>
+      		
+      		<basic name="ndsAmount">
+      			<column name="nds_amount" />
+      		</basic>  
+      		
+      		<basic name="ndsRate">
+      			<column name="nds_rate" />
+      		</basic>       	
+
+      		<basic name="priceWithTax">
+      			<column name="price_with_tax" />
+      		</basic>  
+      		
+      		<basic name="priceWithoutTax">
+      			<column name="price_without_tax" />
+      		</basic>  
+      		      		      			     		     		
+      		<basic name="quantity">
+      			<column name="quantity" />
+      		</basic>   
+
+      		<basic name="turnoverSize">
+      			<column name="turnover_size" />
+      		</basic>  
+      		      		
+      		<basic name="unitNomenclature">
+      			<column name="unit_nomenclature" />
+      		</basic>  
+
+      		<basic name="unitPrice">
+      			<column name="unit_price" />
+      		</basic>   
+
+			<many-to-one name="invoice">
+				<join-column name="customer_trx_id"/>
+			</many-to-one> 	      		    		
+		</attributes>
+	</entity>	
+	
+
+	<entity class="esf.entity.invoice.ar.ArInvoice">
+		<table name="xx_ar_invoice" schema="apps"></table>
+			<attributes>
+				<id name="id">
+					<column name="customer_trx_id" />
+				</id>
+				
+	      		<basic name="invoiceDate">
+	      			<column name="trx_date" />
+	      		</basic>
+      						
+	      		<basic name="invoiceType">
+	      			<column name="invoice_type" />
+	      			<enumerated>STRING</enumerated>
+	      		</basic>
+	      					
+	      		<basic name="currencyCode">
+	      			<column name="currency_code" />
+	      		</basic>
+	      			      						
+	      		<basic name="status">
+	      			<column name="status" />
+	      			<enumerated>STRING</enumerated>
+	      		</basic> 
+	      			      		
+	      		<basic name="num">
+	      			<column name="invoice_num" />
+	      		</basic>	      	
+	      			      		
+	      		<basic name="turnoverDate">
+	      			<column name="turnover_date" />
+	      		</basic>
+	      			      		
+	      		<basic name="userId">
+	      			<column name="created_by" />
+	      		</basic>
+	      						
+				<many-to-one name="consignee">
+					<join-column name="consignee_id"/>
+				</many-to-one>  	   
+				
+				<many-to-one name="consignor">
+					<join-column name="consignor_id"/>
+				</many-to-one>  	
+				
+				<many-to-one name="customer">
+					<join-column name="customer_id"/>
+				</many-to-one>  	
+				
+				<many-to-one name="seller">
+					<join-column name="seller_id"/>
+				</many-to-one> 	
+				
+				<many-to-one name="deliveryItem">
+					<join-column name="customer_site_id"/>
+				</many-to-one> 	
+				
+				<one-to-many name="products" 
+					target-entity="esf.entity.invoice.ar.ArProduct" 
+					mapped-by="invoice" 
+				/>			
+			</attributes>
+	</entity>
+
+		
+
+	<entity class="esf.entity.invoice.ap.ApDeliveryItem">
+		<table name="xx_ap_vendor_site" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="vendor_site_id" />
+			</id>
+
+      		<basic name="contractDate">
+      			<column name="site_date" />
+      		</basic>
+
+      		<basic name="contractNum">
+      			<column name="site_num" />
+      		</basic>
+
+      		<basic name="destination">
+      			<column name="destination" />
+      		</basic>
+      		
+      		<basic name="exerciseWay">
+      			<column name="exercise_way" />
+      		</basic>
+      		
+      		<basic name="term">
+      			<column name="term" />
+      		</basic>     		     		     		
+		</attributes>
+	</entity>	
+	
+	
+	<entity class="esf.entity.invoice.ap.ApProduct">
+		<table name="xx_ap_invoice_line" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="invoice_line_id" />
+			</id>
+
+      		<basic name="description">
+      			<column name="description" />
+      		</basic>
+      		
+      		<basic name="ndsAmount">
+      			<column name="nds_amount" />
+      		</basic>  
+      		
+      		<basic name="ndsRate">
+      			<column name="nds_rate" />
+      		</basic>       	
+
+      		<basic name="priceWithTax">
+      			<column name="price_with_tax" />
+      		</basic>  
+      		
+      		<basic name="priceWithoutTax">
+      			<column name="price_without_tax" />
+      		</basic>  
+      		      		      			     		     		
+      		<basic name="quantity">
+      			<column name="quantity" />
+      		</basic>   
+
+      		<basic name="turnoverSize">
+      			<column name="turnover_size" />
+      		</basic>  
+      		      		
+      		<basic name="unitNomenclature">
+      			<column name="unit_nomenclature" />
+      		</basic>  
+
+      		<basic name="unitPrice">
+      			<column name="unit_price" />
+      		</basic>   
+
+			<many-to-one name="invoice">
+				<join-column name="invoice_id"/>
+			</many-to-one> 	      		    		
+		</attributes>
+	</entity>	
+	
+
+	<entity class="esf.entity.invoice.ap.ApInvoice">
+		<table name="xx_ap_invoice" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="invoice_id" />
+			</id>
+			
+      		<basic name="invoiceDate">
+      			<column name="invoice_date" />
+      		</basic>
+     						
+      		<basic name="invoiceType">
+      			<column name="invoice_type" />
+      			<enumerated>STRING</enumerated>
+      		</basic>
+      					
+      		<basic name="currencyCode">
+      			<column name="currency_code" />
+      		</basic>
+      			      						
+      		<basic name="status">
+      			<column name="status" />
+      			<enumerated>STRING</enumerated>
+      		</basic> 
+      			      		
+      		<basic name="num">
+      			<column name="invoice_num" />
+      		</basic>	      	
+      			      
+      		<basic name="operatorFullName">
+      			<column name="operator_full_name" />
+      		</basic>
+      		      			      		
+      		<basic name="turnoverDate">
+      			<column name="turnover_date" />
+      		</basic>
+      			      		
+			<many-to-one name="consignee">
+				<join-column name="consignee_id"/>
+			</many-to-one>  	   
+			
+			<many-to-one name="consignor">
+				<join-column name="consignor_id"/>
+			</many-to-one>  	
+			
+			<many-to-one name="customer">
+				<join-column name="customer_id"/>
+			</many-to-one>  	
+			
+			<many-to-one name="seller">
+				<join-column name="seller_id"/>
+			</many-to-one> 	
+			
+			<many-to-one name="deliveryItem">
+				<join-column name="seller_site_id"/>
+			</many-to-one> 	
+			
+			<one-to-many name="products" 
+				target-entity="esf.entity.invoice.ap.ApProduct" 
+				mapped-by="invoice" 
+			/>		
+											   			      			      			      			
+		</attributes>
+	</entity>
+
+
+	<entity class="esf.entity.Responsibility">
+		<table name="xx_user_responsibility_v" schema="apps"></table>
+		<attributes>
+			<id name="id">
+				<column name="responsibility_id" />
+			</id>
+
+      		<basic name="name">
+      			<column name="responsibility_name" />
+      		</basic>
+
+      		<basic name="userId">
+      			<column name="user_id" />
+      		</basic>  
+
+      		<basic name="orgId">
+      			<column name="org_id" />
+      		</basic>  
+		</attributes>
+	</entity>	
+
+</entity-mappings>

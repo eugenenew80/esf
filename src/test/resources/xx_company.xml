@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<xx_company id="1" name="Компания 1" tin="111111111111" rnn="222222222222" address="Проспект Дружбы, 1" />
+	<xx_company id="2" name="Компания 2" tin="111111111112" rnn="222222222223" address="Проспект Дружбы, 2" />
+	<xx_company id="3" name="Компания 3" tin="111111111113" rnn="222222222224" address="Проспект Дружбы, 3" />
+</dataset>

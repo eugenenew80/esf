@@ -1,0 +1,24 @@
+<p class="input-group">
+	<input id="{{control.name}}" 
+			name="{{control.controlName}}" 
+			class="form-control" 
+			type="text" 
+			ng-required="control.required"
+		    ng-readonly="!control.editable"
+			ng-model="currentElement[control.name]"  
+			uib-datepicker-popup="{{datepicker.format}}"
+			is-open="datepicker.opened"
+			datepicker-options="datepicker.options"
+			ng-model-options="{timezone: 'utc'}"
+	/>
+	
+	<span class="input-group-btn">
+		<button type="button" 
+				class="btn btn-default"
+				ng-disabled="!control.editable"
+				ng-click="datepicker.opened = true"
+		>
+			<i class="glyphicon glyphicon-calendar"></i>
+		</button>
+	</span>						
+</p>

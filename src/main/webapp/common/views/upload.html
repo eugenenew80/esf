@@ -1,0 +1,38 @@
+<form name="frmUpload" novalidate>
+
+    <div class="modal-header">
+        <h4 class="modal-title">{{form.header}}</h4>
+    </div>
+        
+	<div class="alert alert-danger" ng-show="data.error">
+		Error: {{data.error.status}}: {{data.error.statusText}} <br>
+		Details:  {{data.error.data.messsage || 'Oops! Request error!'}}
+	</div>	
+
+		
+	<!-- Form Edit -->	
+	<div class="modal-body">	
+	
+		<div class="panel panel-default">   
+			<div class="panel-body">		
+											
+			  <div class="form-group">
+			    <input type="file" id="file" file-model="data.file">
+			  </div>
+	
+			</div>
+		</div>			
+	</div>	
+	
+	<!-- Form footer -->
+	<div class="modal-footer">
+		<input ng-repeat="action in form.actions"
+				type="button"
+		        id="{{action.action}}"
+		        value="{{action.button.desc}}" 
+		        class="{{action.button.classes}}" 
+		        ng-click="actions[action.controllerMethod.name]()"
+		/>
+	</div>		
+		                		
+</form>

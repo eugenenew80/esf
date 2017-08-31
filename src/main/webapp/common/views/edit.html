@@ -1,0 +1,42 @@
+<form name="frmEdit" novalidate>
+	
+    <div class="modal-header">
+        <h4 class="modal-title">{{form.header}}</h4>
+    </div>
+        
+	<div class="alert alert-danger" ng-show="data.error">
+		Error: {{data.error.status}}: {{data.error.statusText}} <br>
+		Details:  {{data.error.data.messsage || 'Oops! Request error!'}}
+	</div>	
+		
+	<!-- Form Edit -->	
+	<div class="modal-body">	
+		<div class="panel panel-default" ng-repeat="panel in form.panels"> 
+			<div class="panel-heading">
+				{{panel.title}}
+			</div>
+			
+			<div class="panel-body">													
+				<div ng-repeat="field in form.fields | filter:{visible: true, panel: panel.name}">
+					<complex-form-control element="currentElement"
+								  form="frmEdit"
+								  field="field"							
+					>
+					</complex-form-control>		
+				</div>	
+			</div>
+		</div>
+	</div>
+
+	<!-- Form footer -->
+	<div class="modal-footer">
+		<input ng-repeat="action in form.actions"
+				type="button"
+		        id="{{action.action}}"
+		        value="{{action.button.desc}}" 
+		        class="{{action.button.classes}}" 
+		        ng-click="actions[action.controllerMethod.name]()"
+		        ng-disabled="(action.action=='cmdSave' || action.action=='cmdOk') && (frmEdit.$invalid || frmEdit.$pristine)"
+		/>
+	</div>		                		
+</form>

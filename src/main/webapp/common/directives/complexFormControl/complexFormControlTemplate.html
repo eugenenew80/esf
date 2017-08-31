@@ -1,0 +1,26 @@
+<div ng-class="field.containerClass">
+	
+    <label ng-class="field.label.labelClass" ng-show="field.labelVisible && field.controls.length==0">
+    	{{field.label.desc}}
+    </label>
+	    	
+	<div ng-repeat="control in field.controls | filter: {visible: true}">
+	    
+	    <label for="{{field.controls[0].controlName}}" ng-class="field.label.labelClass" ng-show="field.labelVisible && $index==0">
+	    	{{field.label.desc}}
+	    </label>
+			
+	    <label for="{{control.controlName}}" ng-class="control.label.labelClass" ng-show="control.labelVisible">
+	    	{{control.label.desc}} 
+	    </label>
+	    	    
+	    <div ng-class="control.controlClass">
+		
+			<simple-control element="currentElement"
+					  form="form"
+					  control="control"							
+			>
+			</simple-control>
+		</div>
+	</div>
+</div>

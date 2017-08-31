@@ -1,0 +1,24 @@
+<table class="table table-condensed" style="margin-bottom: 0; border: none;">
+	<tr ng-repeat="item in currentElement[control.name]" style="border: none;">
+	
+		<td class="col-sm-5" style="border: none; padding-left: 15px">
+			<label class="checkbox-inline">
+				<input type="checkbox" ng-model="item.checked" ng-disabled="!control.editable">
+				{{ item.name }}
+			</label>
+		</td>
+
+		<td class="col-sm-7" style="border: none; padding-right: 15px">
+			<select id="{{control.name}}"
+					name="{{control.controlName}}"
+					class="form-control input-sm"
+					ng-required="control.required"
+					ng-model="item.value"
+					ng-options="item.value as item.nameRu for item in dict[control.name + '#' + item.code]"
+					ng-disabled="!item.checked || !control.editable"
+			>
+				<option value=""></option>
+			</select>
+		</td>
+	</tr>
+</table>

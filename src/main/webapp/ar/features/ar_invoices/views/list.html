@@ -1,0 +1,147 @@
+<div>
+    
+    <!-- Path -->
+    <div class="panel panel-default">
+        <breadcrumb paths="data.path"></breadcrumb>
+
+        <div class="alert alert-danger" ng-show="data.error">
+            Error: {{data.error.status}}: {{data.error.statusText}} <br>
+            Details:  {{data.error.data.messsage || 'Oops! Request error!'}}
+        </div>
+    </div>
+  
+    
+    <!-- Search -->
+    <div ng-if="data.state.searchPanel">
+    	<complex-form model="data.state.searchModel" config="descriptionService.sections.main.search" handle="handle">
+    	</complex-form>
+    </div>	 
+       
+    
+    <md-toolbar class="md-hue-2" md-colors="{background: 'Grey-200'}">
+    	<div class="md-toolbar-tools">
+			<md-button ng-repeat="action in descriptionService.sections.main.table.tableActions.items  | filter: {trigger: 'button'}"
+				class="md-raised md-primary"
+				style="text-transform: none"
+				ng-click="handleAction(null, action)"
+				ng-disabled="action.button.disabled"		
+			>
+				{{action.button.desc}}
+			</md-button>
+			
+		   <md-switch class="md-primary" ng-model="data.state.showAllDocs" ng-true-value="'Y'" ng-false-value="'N'" aria-label="Все документы">
+		      Все документы
+		   </md-switch>
+		   
+		   <md-switch class="md-primary" ng-model="data.state.searchPanel" aria-label="Панель фильтров">
+		      Панель фильтров
+		   </md-switch>
+
+		   <md-switch class="md-primary" ng-model="data.state.liveSearch" aria-label="Быстрый поиск">
+		      Быстрый поиск
+		   </md-switch>
+		   		   
+    	</div>
+    </md-toolbar>
+       
+	<div style="margin-bottom: 15px;">
+
+	</div>  	
+	
+
+	<div style="margin-bottom: 15px;" class="btn-group" ng-show="data.elements.length>data.state.rowsPerPage">
+		<a ng-repeat= "page in data.elements | liveSearchFilter:data.liveSearch | paginationFilter:data.state.selectedPage:data.state.rowsPerPage" ng-click="data.state.selectedPage=page" class="btn btn-default" ng-class="getPageClass(page)">
+			{{page}}
+		</a>
+	</div>
+
+ 	
+	<div  class="table table-responsive" style="padding-bottom: 150px;">
+		<table ng-class="descriptionService.sections.main.table.tableClass" ng-style="descriptionService.sections.main.table.tableStyle">
+
+			<thead>
+				<tr>
+					<th style="min-width: 30px; max-width: 30px;" class="text-center" rowspan="6"></th>
+					
+					<th style="min-width: 30px; max-width: 30px;" class="text-center" rowspan="6">
+						<span class="glyphicon glyphicon-th-list"></span>
+					</th>
+
+					<th ng-repeat="item in descriptionService.sections.main.table.fields | filter: {header: true}" style="{{item.headerStyle}}" class="{{item.headerClass}}">
+						{{item.desc}}						
+					</th>
+				</tr>
+			</thead>
+
+ 			
+			<tbody>
+			
+			    <tr ng-show="data.state.liveSearch">
+			        <td/>
+			        <td/>
+			        <td ng-repeat="field in descriptionService.sections.main.table.fields" class={{field.headerClasses}}>
+			            <input type="text" 
+			            	class="col-sm-12 form-control"  
+			            	ng-model="data.liveSearch[field.name]"
+			            	ng-if="field.dataType=='string'"
+			            />
+			        </td>
+			    </tr>
+	    			
+				<tr ng-repeat="item in data.elements | liveSearchFilter:data.liveSearch | rangeFilter:data.state.selectedPage:data.state.rowsPerPage"
+					ng-click="setSelectedRow($index+1)"
+					ng-class="{'selected':$index+1 == getSelectedRow()}"
+				>
+					<td class="text-center">
+						<span class="glyphicon glyphicon-triangle-right text-primary" ng-show="$index+1 == getSelectedRow()" >
+						</span>
+					</td>
+	
+					<td>
+						<div class="btn-group">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" uib-tooltip="Действия" href="">
+						        <span class="caret"></span>
+						    </a>
+		
+							<ul class="dropdown-menu">
+								<li ng-repeat="action in descriptionService.sections.main.table.rowActions.items">
+									<a
+											class="{{action.button.classes}}"
+											style="{{action.button.style}}"
+											ng-click="handleAction('row', action, item)"
+											ng-disabled="{{action.button.disabled}}"
+									>
+										<span class="{{action.button.glyphicon}}"></span>
+										{{action.button.caption}}
+									</a>
+								</li>
+							</ul>
+						</div>
+					</td>
+					
+
+					<td ng-repeat="field in descriptionService.sections.main.table.fields | filter: {cell: true}" class="{{field.cellClass}}" style="{{field.cellStyle}}"
+	                    ng-click="field.dataType=='Yes' ? item[field.name] = (item[field.name]=='Y' ? 'N' : 'Y') : '' ">
+	                     
+	                     <a ng-if="field.dataType=='hyperlink'" target="_blank" href="{{ buildUrl(item) }}">
+	                         {{item[field.name] | cellFilter: field }}
+	                     </a>
+	
+	                     <span ng-if="field.dataType=='Yes'"
+	                     	ng-class=" (item[field.name] || 'N') == 'Y' ? 'glyphicon glyphicon-ok text-success' : '' ">
+	                     </span>
+		                     	
+	                     <span ng-if="field.dataType=='number'">
+	                     	{{item[field.name] | number:2 }}
+	                     </span>
+
+	                     <span ng-if="field.dataType!='number' && field.dataType!='Yes' && field.dataType!='hyperlink'">
+	                         {{item[field.name] | cellFilter: field }}
+	                     </span>
+					</td>
+				</tr>
+			</tbody>
+			
+		</table>
+	</div>       
+</div>

@@ -1,0 +1,9 @@
+<input id="{{control.name}}" 
+	name="{{control.controlName}}" 
+	type="number" 
+	class="form-control" 
+	ng-required="control.required" 
+	ng-pattern="/^[0-9]+$/"
+	ng-model="currentElement[control.name]" 
+	ng-disabled="!control.editable"
+/>

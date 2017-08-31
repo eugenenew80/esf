@@ -1,0 +1,45 @@
+<div>
+
+	<div class="panel panel-default">		
+		<breadcrumb paths="complexView.config.path"></breadcrumb>
+        		
+		<!-- Search -->  
+		<div ng-show="complexView.config.search.enable">
+			<complex-view-search></complex-view-search>
+		</div>
+		
+		
+		<!-- Menu -->	
+		<div class="panel-heading">  
+		       
+			<button ng-repeat="action in complexView.config.tableActions | filter: {trigger: 'button'} | actionFilter:complexView.config.actionFilter"
+				class="{{action.button.classes}}" 
+				style="{{action.button.style}}"
+				ng-click="handleAction('table', action)"
+				ng-disabled="action.button.disabled"
+				uib-tooltip="{{action.button.tooltip}}"
+			>
+				{{action.button.desc}}
+				<span class="{{action.button.glyphicon}}"></span>
+			</button>
+			
+			<div class="pull-right btn-group" ng-show="data.elements.length>data.state.rowsPerPage">
+				<a ng-repeat= "page in data.elements | liveSearchFilter:data.liveSearch | paginationFilter:data.state.selectedPage:data.state.rowsPerPage" ng-click="data.state.selectedPage=page" class="btn btn-default" ng-class="getPageClass(page)">
+					{{page}}
+				</a>
+			</div>			
+		</div>
+		
+		
+		<!-- Table -->
+		<div class="panel-body"> 
+			
+			<div class="alert alert-danger" ng-show="data.error">
+				Error: {{data.error.status}}: {{data.error.statusText}} <br>
+				Details:  {{data.error.data.messsage || 'Oops! Request error!'}}
+			</div>	
+						
+			<complex-view-table></complex-view-table>		
+		</div>
+	</div>
+</div>

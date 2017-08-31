@@ -1,0 +1,150 @@
+<div class="table table-responsive" ng-if="complexView.config.table.tableType=='responsive'">
+	<table ng-class="complexView.config.table.tableClass" ng-style="complexView.config.table.tableStyle">
+
+		<thead>
+			<tr>
+				<th style="width: 30px;" class="text-center" rowspan="2"></th>
+				<th style="width: 30px;" class="text-center" rowspan="2">...</th>
+
+				<th ng-repeat="item in complexView.config.table.fields | filter: {row: 1, header: true}"
+					style="{{item.headerStyle}}"
+					class="{{item.headerClass}}"
+					rowspan="{{item.rowspan || 1}}"
+					colspan="{{item.colspan || 1}}"
+				>
+					{{item.desc}}
+				</th>
+			</tr>
+
+			<tr>
+				<th ng-repeat="item in complexView.config.table.fields | filter: {row: 2, header: true}"
+					style="{{item.headerStyle}}"
+					class="{{item.headerClass}}"
+					rowspan="{{item.rowspan || 1}}"
+					colspan="{{item.colspan || 1}}"
+				>
+					{{item.desc}}
+				</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr ng-repeat="item in data.elements | liveSearchFilter:data.liveSearch | rangeFilter:data.state.selectedPage:data.state.rowsPerPage"
+				ng-click="setSelectedRow($index+1)"
+				ng-class="{'selected':$index+1 == getSelectedRow()}"
+			>
+				<td class="text-center">
+					<span class="glyphicon glyphicon-triangle-right text-primary" ng-show="$index+1 == getSelectedRow()" >
+					</span>
+				</td>
+
+				<td class="dropdown">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" uib-tooltip="Действия" ng-click="">
+						<span class="glyphicon glyphicon-option-horizontal"></span>
+					</a>
+
+					<ul class="dropdown-menu">
+						<li ng-repeat="action in complexView.config.rowActions | actionFilter:complexView.config.actionFilter:item">
+							<a
+									class="{{action.button.classes}}"
+									style="{{action.button.style}}"
+									ng-click="handleAction('row', action, item)"
+									ng-disabled="{{action.button.disabled}}"
+							>
+								<span class="{{action.button.glyphicon}}"></span>
+								{{action.button.caption}}
+							</a>
+						</li>
+					</ul>
+				</td>
+
+				<td ng-repeat="field in complexView.config.table.fields | filter: {cell: true}" class="{{field.cellClass}}" style="{{field.cellStyle}}">
+					<span
+						class="glyphicon"
+						ng-if="field.dataType=='YesNo'"
+						ng-class="item[field.name] =='Y' ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger' "
+					>
+					</span>
+
+					<span
+						ng-if="field.dataType=='Yes'"
+						ng-class="item[field.name]=='Y' ? 'glyphicon glyphicon-ok text-success' : '' "
+					>
+					</span>
+
+					<span ng-if="(field.dataType || 'string')=='string'">
+						{{item[field.name]}}
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+
+
+
+<table ng-class="complexView.config.table.tableClass" ng-style="complexView.config.table.tableStyle" ng-if="(complexView.config.table.tableType || 'auto')=='auto'">
+
+    <!-- Table head -->
+    <thead>
+	    <tr>
+	        <th class="col-md-1" style="text-align: center">
+            	<span class="glyphicon glyphicon-th-list"></span>
+	        </th>
+	        <th ng-repeat="field in complexView.config.table.fields"
+	            class={{field.headerClasses}}
+	            style="text-align: center">
+	            {{field.desc}}
+	        </th>
+	    </tr>
+    </thead>
+
+    <!-- Table body -->
+    <tbody>
+    
+	    <tr ng-show="complexView.config.table.liveSearch">
+	        <td class="col-md-1"></td>
+	        <td ng-repeat="field in complexView.config.table.fields" class={{field.headerClasses}}>
+	            <input type="text" 
+	            	class="col-sm-12 form-control"  
+	            	ng-model="data.liveSearch[field.name]"
+	            />
+	        </td>
+	    </tr>
+	        
+	    <tr ng-repeat="item in data.elements | liveSearchFilter:data.liveSearch | rangeFilter:data.state.selectedPage:data.state.rowsPerPage">
+	
+	
+	        <!-- Row buttons -->
+	        <td class="text-center">
+	            <div class="dropdown">
+	
+	                <a class="btn dropdown-toggle" data-toggle="dropdown" uib-tooltip="Действия" ng-click="">
+	                    <span class="glyphicon glyphicon-option-horizontal"></span>
+	                </a>
+	
+	                <ul class="dropdown-menu">
+	                    <li ng-repeat="action in complexView.config.rowActions | actionFilter:complexView.config.actionFilter:item">
+	                        <a
+	                                class="{{action.button.classes}}"
+	                                style="{{action.button.style}}"
+	                                ng-click="handleAction('row', action, item)"
+	                                ng-disabled="{{action.button.disabled}}"
+	                        >
+	                            <span class="{{action.button.glyphicon}}"></span>
+	                            {{action.button.caption}}
+	                        </a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </td>
+	
+	        <!-- Table data -->
+	        <td ng-repeat="field in complexView.config.table.fields">
+	            {{item[field.name] | cellFilter: field}}
+	        </td>
+	    </tr>
+    </tbody>
+</table>

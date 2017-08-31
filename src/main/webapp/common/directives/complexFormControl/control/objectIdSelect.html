@@ -1,0 +1,10 @@
+<select id="{{control.name}}" 
+		name="{{control.controlName}}" 
+		class="form-control" 
+		ng-required="control.required" 
+		ng-model="currentElement[control.name]" 			
+		ng-options="item[fieldValueName] as item[fieldDisplayName] for item in dict[control.name]"
+		ng-disabled="!control.editable"
+>
+	<option value=""></option>
+</select>
