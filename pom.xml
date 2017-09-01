@@ -2,14 +2,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>kz.kegoc</groupId>
     <artifactId>esf</artifactId>
     <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>esf</name>
 	<description>ESF Application</description>
-	
+
+    <properties>
+        <jersey.version>2.7</jersey.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    	<skipTests>true</skipTests>
+    </properties>
+  		
     <build>
         <finalName>esf</finalName>
         <plugins>
@@ -38,7 +44,7 @@
                 <configuration>
                     <includes>
                         <include>**/AllTests.class</include>
-                        <skipTests>false</skipTests>
+                        <skipTests>${skipTests}</skipTests>
                     </includes>
                 </configuration>
             </plugin>
@@ -105,7 +111,7 @@
 				<local.glassfish.domain>domain1</local.glassfish.domain>
 				<local.glassfish.passfile>
 				    ${local.glassfish.home}/domains/${local.glassfish.domain}/master-password
-				</local.glassfish.passfile>                                  
+				</local.glassfish.passfile>
             </properties>
         </profile>      
         
@@ -122,7 +128,9 @@
 				<local.glassfish.domain>domain1</local.glassfish.domain>
 				<local.glassfish.passfile>
 				    ${local.glassfish.home}/domains/${local.glassfish.domain}/master-password
-				</local.glassfish.passfile>                               
+				</local.glassfish.passfile>  
+				
+				<skipTests>false</skipTests>                             
             </properties>
         </profile>
     </profiles>
@@ -225,9 +233,4 @@
         </dependency>       
     </dependencies>
 
-    <properties>
-        <jersey.version>2.7</jersey.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-    </properties>
 </project>
