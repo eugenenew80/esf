@@ -127,20 +127,7 @@
         </profile>
     </profiles>
     
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.glassfish.jersey</groupId>
-                <artifactId>jersey-bom</artifactId>
-                <version>${jersey.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-
+ 	<dependencies>
     	<!-- Provided dependencies  -->
     
 		<dependency>
