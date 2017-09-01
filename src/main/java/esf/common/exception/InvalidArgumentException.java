@@ -14,6 +14,10 @@ public class InvalidArgumentException extends ApplicationException {
 		this.entity = entity;
 	}
 
+	public InvalidArgumentException(Object entity, String message) {
+		super(message);
+		this.entity = entity;
+	}
 	
 	public String getCode() { return code; }
 	public int getStatusCode() { return statusCode; }
