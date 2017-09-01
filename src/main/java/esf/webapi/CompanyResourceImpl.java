@@ -97,23 +97,24 @@ public class CompanyResourceImpl {
 	
 	
 	@PUT 
-	@Path("{companyId : \\d+}") 
-	public Response update(@PathParam("companyId") Long companyId, CompanyDto companyDto ) {
-		Company updatedCompany = companyService.update(mapper.map(companyDto, Company.class)); 
+	@Path("{id : \\d+}") 
+	public Response update(@PathParam("id") Long id, CompanyDto companyDto ) {
+		Company newCompany = companyService.update(mapper.map(companyDto, Company.class)); 
 		return Response.ok()
-			.entity(mapper.map(updatedCompany, CompanyDto.class))
+			.entity(mapper.map(newCompany, CompanyDto.class))
 			.build();
 	}
 	
 	
 	@DELETE 
-	@Path("{companyId : \\d+}") 
-	public Response delete(@PathParam("companyId") Long companyId) {
-		companyService.delete(companyId);		
+	@Path("{id : \\d+}") 
+	public Response delete(@PathParam("id") Long id) {
+		companyService.delete(id);		
 		return Response.noContent()
 			.build();
 	}	
 	
+
 	@Inject private CompanyService companyService;
 	private DozerBeanMapper mapper;
 }

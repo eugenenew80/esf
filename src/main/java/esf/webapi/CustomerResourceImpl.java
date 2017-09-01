@@ -75,6 +75,34 @@ public class CustomerResourceImpl {
 	}
 
 	
+	@POST
+	public Response create(CustomerDto customerDto) {
+		Customer newCustomer = customerService.create(mapper.map(customerDto, Customer.class));	
+		return Response.ok()
+			.entity(mapper.map(newCustomer, CustomerDto.class))
+			.build();
+	}
+	
+	
+	@PUT 
+	@Path("{id : \\d+}") 
+	public Response update(@PathParam("id") Long id, CustomerDto customerDto ) {
+		Customer newCustomer = customerService.update(mapper.map(customerDto, Customer.class)); 
+		return Response.ok()
+			.entity(mapper.map(newCustomer, CustomerDto.class))
+			.build();
+	}
+	
+	
+	@DELETE 
+	@Path("{id : \\d+}") 
+	public Response delete(@PathParam("id") Long id) {
+		customerService.delete(id);		
+		return Response.noContent()
+			.build();
+	}	
+	
+	
 	@Inject private CustomerService customerService;
 	private DozerBeanMapper mapper;
 }
