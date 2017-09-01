@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="16" author="eugene" context="postgres">
+	    <comment>Creating sequence for table: xx_customer</comment>
+	    <createSequence 
+	            incrementBy="1"
+	            schemaName="apps"
+	            sequenceName="xx_customer_s"
+	            startValue="4"/>
+	</changeSet>	
+
+	<changeSet id="17" author="eugene" context="postgres">
+	    <comment>Creating sequence for table: xx_ap_vendor</comment>
+	    <createSequence 
+	            incrementBy="1"
+	            schemaName="apps"
+	            sequenceName="xx_ap_vendor_s"
+	            startValue="4"/>
+	</changeSet>
+	
+	
+    <changeSet id="18" author="eugene" context="postgres">        
+        <comment>Creating table: xx_ap_vendor_site</comment>
+        <createTable tableName="xx_ap_vendor_site" schemaName="apps">            
+            <column name="vendor_site_id" type="number">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="site_date" type="date">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="site_num" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+                        
+            <column name="destination" type="varchar(300)">
+                <constraints nullable="true"/>
+            </column>
+                       
+            <column name="exercise_way" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+            
+            <column name="term" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="vendor_id" type="number">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+	</changeSet>
+	
+	<changeSet id="19" author="eugene" context="postgres"> 
+	    <comment>Creating primary key for table: xx_ap_vendor_site</comment>
+	    <addPrimaryKey 
+	            columnNames="vendor_site_id"
+	            constraintName="pk_xx_ap_vendor_site"
+	            schemaName="apps"
+	            tableName="xx_ap_vendor_site"/>
+	</changeSet>
+
+	<changeSet id="20" author="eugene" context="postgres">
+		<comment>Load demo data to table: xx_ap_vendor_site</comment>
+	    <loadData
+	            encoding="UTF-8"
+	            file="/src/main/resources/liquibase/postgres/release-1/data/xx_vendor_site.csv"
+	            quotchar="'"
+	            schemaName="apps"
+	            separator=";"
+	            tableName="xx_ap_vendor_site">
+	        
+	        <column name="vendor_site_id" type="NUMERIC"/>
+	        <column name="site_date" 		type="DATE"/>
+	        <column name="site_num" 		type="STRING"/>
+	        <column name="vendor_id" 		type="NUMERIC"/>
+	    </loadData>
+		
+		<rollback>
+        	<delete schemaName="apps" tableName="xx_ap_vendor_site" />
+        </rollback>	
+	</changeSet>
+
+	<changeSet id="21" author="eugene" context="postgres">
+	    <comment>Creating sequence for table: xx_ap_vendor_site</comment>
+	    <createSequence 
+	            incrementBy="1"
+	            schemaName="apps"
+	            sequenceName="xx_ap_vendor_site_s"
+	            startValue="4"/>
+	</changeSet>
+		
+</databaseChangeLog>

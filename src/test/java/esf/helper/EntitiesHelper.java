@@ -15,7 +15,13 @@ public final class EntitiesHelper {
 	public final static String COMPANY_RNN="222222222222";
 	public final static String COMPANY_ADDRESS="Проспект Дружбы, 1";
 	
-    public static Calendar calendarFor(int year, int month, int day) {
+	public final static String CUSTOMER_NAME="Заказчик 1";
+	public final static String CUSTOMER_TIN="300000000001";
+	public final static String CUSTOMER_RNN="400000000001";
+	public final static String CUSTOMER_ADDRESS="Проспект Мира, 1";
+
+	
+	public static Calendar calendarFor(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
@@ -88,4 +94,78 @@ public final class EntitiesHelper {
 		
 		return body.toString();
 	}	
+
+
+
+	//Customer
+
+	public static Customer newCustomer() {
+		Customer сustomer = new Customer();
+		сustomer.setId(1l);
+		сustomer.setName(CUSTOMER_NAME);
+		сustomer.setRnn(CUSTOMER_RNN);
+		сustomer.setTin(CUSTOMER_TIN);
+		сustomer.setAddress(CUSTOMER_ADDRESS);
+		
+		return сustomer;
+	}
+	
+	public static Customer newCustomer(Long id) {
+		Customer customer = newCustomer();
+		customer.setId(id);
+		return customer;
+	}
+	
+	
+	public static void assertCustomer(Customer customer) {
+		assertNotNull(customer);
+		assertNotNull(customer.getId());
+		assertTrue(customer.getId()>0);
+		assertEquals(CUSTOMER_NAME, customer.getName());
+		assertEquals(CUSTOMER_RNN, customer.getRnn() );
+		assertEquals(CUSTOMER_TIN, customer.getTin() );
+		assertEquals(CUSTOMER_ADDRESS, customer.getAddress() );
+	}
+	
+	public static void assertCustomer(Customer customer1, Customer customer2) {
+		assertNotNull(customer1);
+		assertNotNull(customer1.getId());
+		assertTrue(customer1.getId()>0);
+		
+		assertNotNull(customer2);
+		assertNotNull(customer2.getId());
+		assertTrue(customer2.getId()>0);
+		
+		assertEquals(customer1.getId(), customer2.getId());
+		assertEquals(customer1.getName(), customer2.getName());
+		assertEquals(customer1.getRnn(), customer2.getRnn() );
+		assertEquals(customer1.getTin(), customer2.getTin() );
+		assertEquals(customer1.getAddress(), customer2.getAddress() );
+	}
+	
+	
+	public static String customerToJson(Customer customer) {
+		JSONObject body = new JSONObject();
+		
+		try {
+			if (customer.getId()!=null) 
+				body.put("id", customer.getId());
+				
+			if (customer.getName()!=null) 
+				body.put("name", customer.getName());
+			
+			if (customer.getTin()!=null)
+				body.put("tin", customer.getTin());
+			
+			if (customer.getAddress()!=null)
+				body.put("address", customer.getAddress());
+		} 
+		catch (JSONException e) {}
+		
+		return body.toString();
+	}	
+
+
+
+
 }

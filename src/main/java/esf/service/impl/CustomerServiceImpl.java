@@ -2,6 +2,7 @@ package esf.service.impl;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.Validator;
 
 import esf.common.exception.EntityNotFoundException;
 import esf.common.exception.InvalidArgumentException;
@@ -16,8 +17,8 @@ import esf.service.CustomerService;
 public class CustomerServiceImpl extends AbstractEntityService<Customer> implements CustomerService {
 
     @Inject
-    public CustomerServiceImpl(Repository<Customer> repository) {
-        super(repository);
+    public CustomerServiceImpl(Repository<Customer> repository, Validator validator) {
+    	super(repository, validator);
     }	
     
     

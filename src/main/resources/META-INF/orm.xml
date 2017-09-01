@@ -6,6 +6,13 @@
 		<attributes>
 			<id name="id">
 				<column name="id" />
+        		<generated-value strategy="SEQUENCE" generator="xx_customer_gen" />
+        		<sequence-generator
+        			name="xx_customer_gen"
+        			sequence-name="xx_customer_s"
+					schema="apps"
+					allocation-size="1"
+        		/>				
 			</id>
 
       		<basic name="address">
@@ -45,6 +52,13 @@
 		<attributes>
 			<id name="id">
 				<column name="id" />
+        		<generated-value strategy="SEQUENCE" generator="xx_ap_vendor_gen" />
+        		<sequence-generator
+        			name="xx_ap_vendor_gen"
+        			sequence-name="xx_ap_vendor_s"
+					schema="apps"
+					allocation-size="1"
+        		/>					
 			</id>
 
       		<basic name="address">
@@ -305,6 +319,13 @@
 		<attributes>
 			<id name="id">
 				<column name="vendor_site_id" />
+        		<generated-value strategy="SEQUENCE" generator="xx_ap_vendor_site_gen" />
+        		<sequence-generator
+        			name="xx_ap_vendor_site_gen"
+        			sequence-name="xx_ap_vendor_site_s"
+					schema="apps"
+					allocation-size="1"
+        		/>				
 			</id>
 
       		<basic name="contractDate">
