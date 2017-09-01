@@ -1,31 +1,13 @@
 package esf.webapi;
 
-import static javax.servlet.http.HttpServletResponse.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
-
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import org.dozer.DozerBeanMapper;
-
-import esf.common.repository.query.ConditionType;
-import esf.common.repository.query.MyQueryParam;
-import esf.common.repository.query.Query;
-import esf.common.repository.query.QueryImpl;
+import esf.common.repository.query.*;
 import esf.entity.Customer;
 import esf.entity.dto.CustomerDto;
 import esf.service.CustomerService;
@@ -64,52 +46,32 @@ public class CustomerResourceImpl {
 	
 	
 	@GET 
-	@Path("/{customerId : \\d+}") 
-	public Response getById(@PathParam("customerId") Long customerId) {
-		
-		if (customerId==null)
-			throw new WebApplicationException(SC_BAD_REQUEST);
-		
-		Customer customer = customerService.findById(customerId);
-		if (customer==null)
-			throw new WebApplicationException(SC_NOT_FOUND);
-		
+	@Path("/{id : \\d+}") 
+	public Response getById(@PathParam("id") Long id) {
+		Customer customer = customerService.findById(id);
 		return Response.ok()
-				.entity(mapper.map(customer, CustomerDto.class))
-				.build();		
+			.entity(mapper.map(customer, CustomerDto.class))
+			.build();		
 	}
 	
 
 	@GET
-	@Path("/{customerName}")
-	public Response getByName(@PathParam("customerName") String customerName) {		
-		if (customerName==null)
-			throw new WebApplicationException(SC_BAD_REQUEST);		
-		
-		Customer customer = customerService.findByName(customerName);
-		if (customer==null)
-			throw new WebApplicationException(SC_NOT_FOUND);
-		
+	@Path("/{name}")
+	public Response getByName(@PathParam("name") String name) {		
+		Customer customer = customerService.findByName(name);
 		return Response.ok()
-				.entity(mapper.map(customer, CustomerDto.class))
-				.build();
+			.entity(mapper.map(customer, CustomerDto.class))
+			.build();
 	}
 	
 	
 	@GET 
 	@Path("/byTin/{tin : \\d+}") 
 	public Response getByTin(@PathParam("tin") String tin) {
-		
-		if (tin==null)
-			throw new WebApplicationException(SC_BAD_REQUEST);
-		
 		Customer customer = customerService.findByTin(tin);
-		if (customer==null)
-			throw new WebApplicationException(SC_NOT_FOUND);
-		
 		return Response.ok()
-				.entity(mapper.map(customer, CustomerDto.class))
-				.build();		
+			.entity(mapper.map(customer, CustomerDto.class))
+			.build();		
 	}
 
 	
