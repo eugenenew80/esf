@@ -33,11 +33,11 @@ import esf.common.repository.query.ConditionType;
 import esf.common.repository.query.MyQueryParam;
 import esf.common.repository.query.Query;
 import esf.common.repository.query.QueryImpl;
+import esf.entity.ApInvoice;
 import esf.entity.InvoiceStatus;
 import esf.entity.InvoiceType;
 import esf.entity.dto.ApInvoiceDto;
 import esf.entity.dto.RawDataDto;
-import esf.entity.invoice.ap.ApInvoice;
 import esf.service.ApInvoiceService;
 
 import javax.xml.parsers.DocumentBuilder;

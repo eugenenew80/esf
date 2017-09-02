@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import esf.common.repository.Repository;
 import esf.common.service.AbstractEntityService;
-import esf.entity.invoice.ap.ApInvoice;
+import esf.entity.ApInvoice;
 import esf.repository.ApInvoiceRepository;
 import esf.service.ApInvoiceService;;
 

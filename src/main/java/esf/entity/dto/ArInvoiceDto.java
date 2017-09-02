@@ -1,11 +1,12 @@
 package esf.entity.dto;
 
 import java.util.Date;
+
+import esf.entity.ArDeliveryItem;
 import esf.entity.Customer;
 import esf.entity.InvoiceStatus;
 import esf.entity.InvoiceType;
 import esf.entity.Seller;
-import esf.entity.invoice.ar.ArDeliveryItem;
 import lombok.Data;
 
 @Data

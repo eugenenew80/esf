@@ -161,7 +161,7 @@
 	</entity>
 	
 	
-	<entity class="esf.entity.invoice.ar.ArDeliveryItem">
+	<entity class="esf.entity.ArDeliveryItem">
 		<table name="xx_customer_site" schema="apps"></table>
 		<attributes>
 			<id name="id">
@@ -202,7 +202,7 @@
 	</entity>	
 	
 	
-	<entity class="esf.entity.invoice.ar.ArProduct">
+	<entity class="esf.entity.ArProduct">
 		<table name="xx_ar_invoice_line" schema="apps"></table>
 		<attributes>
 			<id name="id">
@@ -252,7 +252,7 @@
 	</entity>	
 	
 
-	<entity class="esf.entity.invoice.ar.ArInvoice">
+	<entity class="esf.entity.ArInvoice">
 		<table name="xx_ar_invoice" schema="apps"></table>
 			<attributes>
 				<id name="id">
@@ -310,7 +310,7 @@
 				</many-to-one> 	
 				
 				<one-to-many name="products" 
-					target-entity="esf.entity.invoice.ar.ArProduct" 
+					target-entity="esf.entity.ArProduct" 
 					mapped-by="invoice" 
 				/>			
 			</attributes>
@@ -318,7 +318,7 @@
 
 		
 
-	<entity class="esf.entity.invoice.ap.ApDeliveryItem">
+	<entity class="esf.entity.ApDeliveryItem">
 		<table name="xx_ap_vendor_site" schema="apps"></table>
 		<attributes>
 			<id name="id">
@@ -359,7 +359,7 @@
 	</entity>	
 	
 	
-	<entity class="esf.entity.invoice.ap.ApProduct">
+	<entity class="esf.entity.ApProduct">
 		<table name="xx_ap_invoice_line" schema="apps"></table>
 		<attributes>
 			<id name="id">
@@ -409,7 +409,7 @@
 	</entity>	
 	
 
-	<entity class="esf.entity.invoice.ap.ApInvoice">
+	<entity class="esf.entity.ApInvoice">
 		<table name="xx_ap_invoice" schema="apps"></table>
 		<attributes>
 			<id name="id">
@@ -467,7 +467,7 @@
 			</many-to-one> 	
 			
 			<one-to-many name="products" 
-				target-entity="esf.entity.invoice.ap.ApProduct" 
+				target-entity="esf.entity.ApProduct" 
 				mapped-by="invoice" 
 			/>		
 											   			      			      			      			

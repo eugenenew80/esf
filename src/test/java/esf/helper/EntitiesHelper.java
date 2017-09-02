@@ -10,8 +10,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import esf.entity.*;
-import esf.entity.invoice.ap.ApDeliveryItem;
-import esf.entity.invoice.ar.ArDeliveryItem;
 
 public final class EntitiesHelper {	 
 	public final static String COMPANY_NAME="Компания 1";

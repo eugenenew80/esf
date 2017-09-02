@@ -4,7 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 
 import esf.common.repository.AbstractRepository;
-import esf.entity.invoice.ap.ApInvoice;
+import esf.entity.ApInvoice;
 import esf.repository.ApInvoiceRepository;
 
 

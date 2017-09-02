@@ -2,7 +2,6 @@ package esf.entity;
 
 import java.util.Set;
 
-import esf.entity.invoice.ar.ArProduct;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

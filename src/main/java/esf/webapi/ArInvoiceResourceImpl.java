@@ -34,10 +34,10 @@ import esf.common.repository.query.ConditionType;
 import esf.common.repository.query.MyQueryParam;
 import esf.common.repository.query.Query;
 import esf.common.repository.query.QueryImpl;
+import esf.entity.ArInvoice;
 import esf.entity.InvoiceStatus;
 import esf.entity.dto.ArInvoiceDto;
 import esf.entity.dto.ListInvoicesDto;
-import esf.entity.invoice.ar.ArInvoice;
 import esf.service.ArInvoiceService;
 
 

@@ -6,7 +6,7 @@ import javax.validation.Validator;
 
 import esf.common.repository.Repository;
 import esf.common.service.AbstractEntityService;
-import esf.entity.invoice.ap.ApDeliveryItem;
+import esf.entity.ApDeliveryItem;
 import esf.service.ApDeliveryItemService;
 
 @Stateless

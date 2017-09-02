@@ -1,7 +1,7 @@
 package esf.service;
 
 import esf.common.service.EntityService;
-import esf.entity.invoice.ar.ArInvoice;
+import esf.entity.ArInvoice;
 
 public interface ArInvoiceService extends EntityService<ArInvoice> {
 	String toXML(Long invoiceId);

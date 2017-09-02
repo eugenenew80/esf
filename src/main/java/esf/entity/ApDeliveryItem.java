@@ -1,10 +1,9 @@
-package esf.entity.invoice.ar;
+package esf.entity;
 
 import java.util.Date;
 import javax.persistence.Entity;
 
 import esf.common.entity.HasId;
-import esf.entity.Customer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -12,12 +11,12 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(of= {"id"})
-public class ArDeliveryItem implements HasId {
+public class ApDeliveryItem implements HasId {
 	private Long id;
 	private Date contractDate;
 	private String contractNum;
 	private String destination;
 	private String exerciseWay;
 	private String term;
-	private Customer customer;
+	private Vendor vendor;
 }

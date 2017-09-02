@@ -3,7 +3,7 @@ package esf.repository.impl;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import esf.common.repository.AbstractRepository;
-import esf.entity.invoice.ap.ApDeliveryItem;
+import esf.entity.ApDeliveryItem;
 import esf.repository.ApDeliveryItemRepository;
 
 @Stateless
