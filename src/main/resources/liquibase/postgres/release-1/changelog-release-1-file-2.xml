@@ -6,7 +6,7 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-	<changeSet id="16" author="eugene" context="postgres">
+	<changeSet id="16" logicalFilePath="path-independent" author="eugene" context="postgres">
 	    <comment>Creating sequence for table: xx_customer</comment>
 	    <createSequence 
 	            incrementBy="1"
@@ -15,7 +15,7 @@
 	            startValue="4"/>
 	</changeSet>	
 
-	<changeSet id="17" author="eugene" context="postgres">
+	<changeSet id="17" logicalFilePath="path-independent" author="eugene" context="postgres">
 	    <comment>Creating sequence for table: xx_ap_vendor</comment>
 	    <createSequence 
 	            incrementBy="1"
@@ -25,7 +25,7 @@
 	</changeSet>
 	
 	
-    <changeSet id="18" author="eugene" context="postgres">        
+    <changeSet id="18" logicalFilePath="path-independent" author="eugene" context="postgres">        
         <comment>Creating table: xx_ap_vendor_site</comment>
         <createTable tableName="xx_ap_vendor_site" schemaName="apps">            
             <column name="vendor_site_id" type="number">
@@ -58,7 +58,7 @@
         </createTable>
 	</changeSet>
 	
-	<changeSet id="19" author="eugene" context="postgres"> 
+	<changeSet id="19" logicalFilePath="path-independent" author="eugene" context="postgres"> 
 	    <comment>Creating primary key for table: xx_ap_vendor_site</comment>
 	    <addPrimaryKey 
 	            columnNames="vendor_site_id"
@@ -67,7 +67,7 @@
 	            tableName="xx_ap_vendor_site"/>
 	</changeSet>
 
-	<changeSet id="20" author="eugene" context="postgres">
+	<changeSet id="20" logicalFilePath="path-independent" author="eugene" context="postgres">
 		<comment>Load demo data to table: xx_ap_vendor_site</comment>
 	    <loadData
 	            encoding="UTF-8"
@@ -88,7 +88,7 @@
         </rollback>	
 	</changeSet>
 
-	<changeSet id="21" author="eugene" context="postgres">
+	<changeSet id="21" logicalFilePath="path-independent" author="eugene" context="postgres">
 	    <comment>Creating sequence for table: xx_ap_vendor_site</comment>
 	    <createSequence 
 	            incrementBy="1"
