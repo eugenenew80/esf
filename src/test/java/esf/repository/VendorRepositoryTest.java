@@ -32,6 +32,7 @@ import static esf.helper.EntitiesHelper.*;
 public class VendorRepositoryTest {
 	private static VendorRepository repository;
 	private static DBUnitHelper dbUnitHelper;
+	private List<DataSetLoader> dataSetList = Arrays.asList(new DataSetLoader("apps", "xx_ap_vendor.xml"));
 	
 
 	@BeforeClass
@@ -49,8 +50,7 @@ public class VendorRepositoryTest {
 	@Before
 	public void setUp() throws Exception {		
 		dbUnitHelper.beginTransaction();
-		dbUnitHelper.delete( Arrays.asList(new DataSetLoader("apps", "xx_vendor.xml")));
-		dbUnitHelper.insert( Arrays.asList(new DataSetLoader("apps", "xx_vendor.xml")));
+		dbUnitHelper.cleanAndInsert(dataSetList);
 	}
 	
 	@After

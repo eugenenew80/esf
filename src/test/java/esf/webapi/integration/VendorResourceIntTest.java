@@ -27,7 +27,7 @@ import static esf.helper.EntitiesHelper.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class VendorResourceIntTest extends AbstractResourceTest {
 	private DBUnitHelper dbUnitHelper;
-	private List<DataSetLoader> dataSetList = Arrays.asList(new DataSetLoader("apps", "xx_vendor.xml"));
+	private List<DataSetLoader> dataSetList = Arrays.asList(new DataSetLoader("apps", "xx_ap_vendor.xml"));
 	
 	@BeforeClass
 	public static void setUpClass() {
