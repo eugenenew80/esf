@@ -108,7 +108,7 @@
 				                  
 				<local.glassfish.home>C:/jee/glassfish4/glassfish</local.glassfish.home>
 				<local.glassfish.user>admin</local.glassfish.user>
-				<local.glassfish.domain>domain2</local.glassfish.domain>
+				<local.glassfish.domain>domain1</local.glassfish.domain>
 				<local.glassfish.passfile>
 				    ${local.glassfish.home}/domains/${local.glassfish.domain}/master-password
 				</local.glassfish.passfile>
@@ -125,7 +125,7 @@
                   
 				<local.glassfish.home>C:/jee/glassfish4/glassfish</local.glassfish.home>
 				<local.glassfish.user>admin</local.glassfish.user>
-				<local.glassfish.domain>domain2</local.glassfish.domain>
+				<local.glassfish.domain>domain1</local.glassfish.domain>
 				<local.glassfish.passfile>
 				    ${local.glassfish.home}/domains/${local.glassfish.domain}/master-password
 				</local.glassfish.passfile>  
