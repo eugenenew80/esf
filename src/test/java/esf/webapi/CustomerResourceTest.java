@@ -1,4 +1,4 @@
-package esf.webapi.unit;
+package esf.webapi;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import com.jayway.restassured.http.ContentType;
 
-import esf.webapi.CompanyResourceImpl;
+import esf.webapi.CustomerResourceImpl;
 import esf.webapi.helper.AbstractResourceTest;
 import esf.webapi.helper.Binding;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -25,33 +25,33 @@ import com.jayway.restassured.RestAssured;
 import esf.common.exception.EntityNotFoundException;
 import esf.common.exception.InvalidArgumentException;
 import esf.common.exception.RepositoryNotFoundException;
-import esf.entity.Company;
-import esf.service.CompanyService;
+import esf.entity.Customer;
+import esf.service.CustomerService;
 import static esf.helper.EntitiesHelper.*;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class CompanyResourceTest extends AbstractResourceTest {
-	CompanyService service = null;
+public class CustomerResourceTest extends AbstractResourceTest {
+	CustomerService service = null;
 	
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		RestAssured.baseURI = "http://localhost:2222/esf/webapi/";
-        RestAssured.basePath = "/company/";
+        RestAssured.basePath = "/customer/";
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	}
 
 	
 	@Before
 	public void setUp() throws Exception {
-        service = mock(CompanyService.class);
+        service = mock(CustomerService.class);
 		setBinder(new AbstractBinder() {
 			protected void configure() {
-				bind(service).to(CompanyService.class);
+				bind(service).to(CustomerService.class);
 			}
 		});
 
-		setResource(new CompanyResourceImpl());
+		setResource(new CustomerResourceImpl());
 		start(Binding.Manual);
 	}
 	
@@ -67,7 +67,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 	@Test
 	public void theListCompaniesMayBeFound() {
 		when(service.find(anyObject()))
-			.thenReturn(Arrays.asList(newCompany(1L), newCompany(2L), newCompany(3L) ));
+			.thenReturn(Arrays.asList(newCustomer(1L), newCustomer(2L), newCustomer(3L) ));
 		
 		given().
 			//log().all().
@@ -89,9 +89,9 @@ public class CompanyResourceTest extends AbstractResourceTest {
 	
 	
 	@Test
-	public void existingCompanyMayBeFoundById() {
+	public void existingCustomerMayBeFoundById() {
 		when(service.findById(1L))
-			.thenReturn(newCompany(1L));	
+			.thenReturn(newCustomer(1L));	
 		
 		given().
 			//log().all().
@@ -104,91 +104,91 @@ public class CompanyResourceTest extends AbstractResourceTest {
             contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
-			body("name", is(equalTo(COMPANY_NAME))).
-			body("tin", is(equalTo(COMPANY_TIN))).
-			body("address", is(equalTo(COMPANY_ADDRESS)));
+			body("name", is(equalTo(CUSTOMER_NAME))).
+			body("tin", is(equalTo(CUSTOMER_TIN))).
+			body("address", is(equalTo(CUSTOMER_ADDRESS)));
 	
 		verify(service, times(1)).findById(1L);
 	}
 
 
 	@Test
-	public void existingCompanyMayBeFoundByName() {
-		when(service.findByName(COMPANY_NAME))
-			.thenReturn(newCompany(1L));	
+	public void existingCustomerMayBeFoundByName() {
+		when(service.findByName(CUSTOMER_NAME))
+			.thenReturn(newCustomer(1L));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().
-			get("byName/" + COMPANY_NAME).
+			get("byName/" + CUSTOMER_NAME).
 		then().
 			//log().all().
             contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
-			body("name", is(equalTo(COMPANY_NAME))).
-			body("tin", is(equalTo(COMPANY_TIN))).
-			body("address", is(equalTo(COMPANY_ADDRESS)));
+			body("name", is(equalTo(CUSTOMER_NAME))).
+			body("tin", is(equalTo(CUSTOMER_TIN))).
+			body("address", is(equalTo(CUSTOMER_ADDRESS)));
 		
-		verify(service, times(1)).findByName(COMPANY_NAME);
+		verify(service, times(1)).findByName(CUSTOMER_NAME);
 	}
 
 	
 	@Test
-	public void existingCompanyMayBeFoundByTin() {
-		when(service.findByTin(COMPANY_TIN))
-			.thenReturn(newCompany(1L));	
+	public void existingCustomerMayBeFoundByTin() {
+		when(service.findByTin(CUSTOMER_TIN))
+			.thenReturn(newCustomer(1L));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().
-			get("byTin/" + COMPANY_TIN).
+			get("byTin/" + CUSTOMER_TIN).
 		then().
 			//log().all().
             contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
-			body("name", is(equalTo(COMPANY_NAME))).
-			body("tin", is(equalTo(COMPANY_TIN))).
-			body("address", is(equalTo(COMPANY_ADDRESS)));
+			body("name", is(equalTo(CUSTOMER_NAME))).
+			body("tin", is(equalTo(CUSTOMER_TIN))).
+			body("address", is(equalTo(CUSTOMER_ADDRESS)));
 	
-		verify(service, times(1)).findByTin(COMPANY_TIN);
+		verify(service, times(1)).findByTin(CUSTOMER_TIN);
 	}
 	
 	
 	@Test
-	public void newCompanyMayBeCreated() {
-		Company origCompany = newCompany(null);
-		when(service.create(origCompany))
-			.thenReturn(newCompany(1L));	
+	public void newCustomerMayBeCreated() {
+		Customer origCustomer = newCustomer(null);
+		when(service.create(origCustomer))
+			.thenReturn(newCustomer(1L));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
+			body(customerToJson(origCustomer)).
 			post().
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(not(nullValue()))).
-			body("name", is(equalTo(COMPANY_NAME))).
-			body("tin", is(equalTo(COMPANY_TIN))).
-			body("address", is(equalTo(COMPANY_ADDRESS)));					
+			body("name", is(equalTo(CUSTOMER_NAME))).
+			body("tin", is(equalTo(CUSTOMER_TIN))).
+			body("address", is(equalTo(CUSTOMER_ADDRESS)));					
 	
 		verify(service, times(1)).create(anyObject());
 	}
 	
 	
 	@Test
-	public void existingCompanyMayBeUpdated()  {
-		Company origCompany = newCompany(1L);				
+	public void existingCustomerMayBeUpdated()  {
+		Customer origCustomer = newCustomer(1L);				
 		when(service.update(anyObject()))
 			.then(returnsFirstArg());
 		
@@ -197,24 +197,24 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
-			put(origCompany.getId().toString()).
+			body(customerToJson(origCustomer)).
+			put(origCustomer.getId().toString()).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
-			body("name", is(equalTo(COMPANY_NAME))).
-			body("tin", is(equalTo(COMPANY_TIN))).
-			body("address", is(equalTo(COMPANY_ADDRESS)));					
+			body("name", is(equalTo(CUSTOMER_NAME))).
+			body("tin", is(equalTo(CUSTOMER_TIN))).
+			body("address", is(equalTo(CUSTOMER_ADDRESS)));					
 	
 		verify(service, times(1)).update(anyObject());
 	}	
 	
 	
 	@Test
-	public void existingCompanyMayBeDeleted() {
-		Company origCompany = newCompany(1L);		
+	public void existingCustomerMayBeDeleted() {
+		Customer origCustomer = newCustomer(1L);		
 		when(service.delete(anyObject()))
 			.thenReturn(true);		
 
@@ -223,7 +223,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			delete(origCompany.getId().toString()).
+			delete(origCustomer.getId().toString()).
 		then().
 			//log().all().
 			and().statusCode(204);
@@ -236,7 +236,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 	//Fail cases - Entity not found Exception
 
 	@Test
-	public void failMethodFindByIdIfCompanyIdIsNotExist() {
+	public void failMethodFindByIdIfCustomerIdIsNotExist() {
 		when(service.findById(anyLong()))
 			.thenThrow(new EntityNotFoundException(1L));	
 		
@@ -259,16 +259,16 @@ public class CompanyResourceTest extends AbstractResourceTest {
 
 
 	@Test
-	public void failMethodFindByNameIfCompanyNameIsNotExist() {
+	public void failMethodFindByNameIfCustomerNameIsNotExist() {
 		when(service.findByName(anyString()))
-			.thenThrow(new EntityNotFoundException(COMPANY_NAME));	
+			.thenThrow(new EntityNotFoundException(CUSTOMER_NAME));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().
-			get("byName/" + COMPANY_NAME).
+			get("byName/" + CUSTOMER_NAME).
 		then().
 			//log().all().
             contentType(ContentType.JSON).
@@ -282,16 +282,16 @@ public class CompanyResourceTest extends AbstractResourceTest {
 
 	
 	@Test
-	public void failMethodFindByTinIfCompanyTinIsNotExist() {
+	public void failMethodFindByTinIfCustomerTinIsNotExist() {
 		when(service.findByTin(anyString()))
-			.thenThrow(new EntityNotFoundException(COMPANY_TIN));	
+			.thenThrow(new EntityNotFoundException(CUSTOMER_TIN));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().
-			get("byTin/" + COMPANY_TIN).
+			get("byTin/" + CUSTOMER_TIN).
 		then().
 			//log().all().
             contentType(ContentType.JSON).
@@ -305,8 +305,8 @@ public class CompanyResourceTest extends AbstractResourceTest {
 
 
 	@Test
-	public void failMethodUpdateIfCompanyIdIsNotExist() {
-		Company origCompany = newCompany(1L);
+	public void failMethodUpdateIfCustomerIdIsNotExist() {
+		Customer origCustomer = newCustomer(1L);
 		when(service.update(anyObject()))
 			.thenThrow(new EntityNotFoundException(1L));		
 		
@@ -315,8 +315,8 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
-			put(origCompany.getId().toString()).
+			body(customerToJson(origCustomer)).
+			put(origCustomer.getId().toString()).
 		then().
 			//log().all().
             contentType(ContentType.JSON).
@@ -330,8 +330,8 @@ public class CompanyResourceTest extends AbstractResourceTest {
 	
 
 	@Test
-	public void failMethodDeleteIfCompanyIdIsNotExist() {
-		Company origCompany = newCompany(1L);		
+	public void failMethodDeleteIfCustomerIdIsNotExist() {
+		Customer origCustomer = newCustomer(1L);		
 		when(service.delete(anyLong()))
 			.thenThrow(new EntityNotFoundException(1L));		
 
@@ -340,7 +340,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			delete(origCompany.getId().toString()).
+			delete(origCustomer.getId().toString()).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
@@ -356,17 +356,17 @@ public class CompanyResourceTest extends AbstractResourceTest {
 	//Fail cases - Invalid Argument Exception
 	
 	@Test
-	public void failMethodCreateIfCompanyIdIsNotNull() {		
-		Company origCompany = newCompany(1L);
+	public void failMethodCreateIfCustomerIdIsNotNull() {		
+		Customer origCustomer = newCustomer(1L);
 		when(service.create(anyObject()))
-			.thenThrow(new InvalidArgumentException(origCompany));	
+			.thenThrow(new InvalidArgumentException(origCustomer));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
+			body(customerToJson(origCustomer)).
 			post().
 		then().
 			//log().all().
@@ -381,17 +381,17 @@ public class CompanyResourceTest extends AbstractResourceTest {
 		
 
 	@Test
-	public void failMethodUpdateIfCompanyIdIsNull() {		
-		Company origCompany = newCompany(null);		
+	public void failMethodUpdateIfCustomerIdIsNull() {		
+		Customer origCustomer = newCustomer(null);		
 		when(service.update(anyObject()))
-			.thenThrow(new InvalidArgumentException(origCompany));	
+			.thenThrow(new InvalidArgumentException(origCustomer));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
+			body(customerToJson(origCustomer)).
 			put("1").
 		then().
 			//log().all().
@@ -459,7 +459,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().
-			get("byName/" + COMPANY_NAME).
+			get("byName/" + CUSTOMER_NAME).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
@@ -480,7 +480,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().
-			get("byTin/" + COMPANY_TIN).
+			get("byTin/" + CUSTOMER_TIN).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
@@ -493,7 +493,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 	
 	@Test
 	public void failMethodCreateIfRepositoryIsNull() {		
-		Company origCompany = newCompany(null);
+		Customer origCustomer = newCustomer(null);
 		when(service.create(anyObject()))
 			.thenThrow(new RepositoryNotFoundException());						
 		
@@ -502,7 +502,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
+			body(customerToJson(origCustomer)).
 			post().
 		then().
 			//log().all().
@@ -516,7 +516,7 @@ public class CompanyResourceTest extends AbstractResourceTest {
 
 	@Test
 	public void failMethodUpdateIfRepositoryIsNull() {		
-		Company origCompany = newCompany(1L);
+		Customer origCustomer = newCustomer(1L);
 		when(service.update(anyObject()))
 			.thenThrow(new RepositoryNotFoundException());						
 		
@@ -525,8 +525,8 @@ public class CompanyResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(companyToJson(origCompany)).
-			put(origCompany.getId().toString()).
+			body(customerToJson(origCustomer)).
+			put(origCustomer.getId().toString()).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).

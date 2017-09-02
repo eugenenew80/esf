@@ -27,7 +27,6 @@ public class CustomerResourceImpl {
 
 
 	@GET
-	@Path("/") 
 	public Response getAll(@QueryParam("name") @DefaultValue("") String name) {
 		
 		Query query = QueryImpl.builder()
@@ -56,7 +55,7 @@ public class CustomerResourceImpl {
 	
 
 	@GET
-	@Path("/{name}")
+	@Path("/byName/{name}")
 	public Response getByName(@PathParam("name") String name) {		
 		Customer customer = customerService.findByName(name);
 		return Response.ok()
@@ -66,7 +65,7 @@ public class CustomerResourceImpl {
 	
 	
 	@GET 
-	@Path("/byTin/{tin : \\d+}") 
+	@Path("/byTin/{tin}") 
 	public Response getByTin(@PathParam("tin") String tin) {
 		Customer customer = customerService.findByTin(tin);
 		return Response.ok()

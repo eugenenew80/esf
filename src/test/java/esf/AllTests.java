@@ -6,14 +6,21 @@ import org.junit.runners.Suite.SuiteClasses;
 import esf.repository.CompanyRepositoryTest;
 import esf.repository.CustomerRepositoryTest;
 import esf.service.*;
+import esf.webapi.CompanyResourceTest;
+import esf.webapi.CustomerResourceTest;
+import esf.webapi.integration.CompanyResourceIntTest;
+import esf.webapi.integration.CustomerResourceIntTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({
-	CompanyServiceTest.class,
+@SuiteClasses({	
 	CompanyRepositoryTest.class,
-	esf.webapi.unit.CompanyResourceTest.class,
-	esf.webapi.integration.CompanyResourceTest.class,
+	CompanyServiceTest.class,	
+	CompanyResourceTest.class,
+	CompanyResourceIntTest.class,
 	
-	CustomerRepositoryTest.class
+	CustomerRepositoryTest.class,
+	CustomerServiceTest.class,
+	CustomerResourceTest.class,
+	CustomerResourceIntTest.class,	
 })
 public class AllTests { }
