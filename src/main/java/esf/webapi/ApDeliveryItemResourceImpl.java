@@ -14,7 +14,7 @@ import esf.service.VendorService;
 
 
 @RequestScoped
-@Path("/vendor")
+@Path("/apDeliverItem")
 @Produces({ "application/xml", "application/json" })
 @Consumes({ "application/xml", "application/json" })
 public class ApDeliveryItemResourceImpl {
