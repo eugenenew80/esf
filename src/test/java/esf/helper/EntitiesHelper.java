@@ -20,6 +20,11 @@ public final class EntitiesHelper {
 	public final static String CUSTOMER_RNN="400000000001";
 	public final static String CUSTOMER_ADDRESS="Проспект Мира, 1";
 
+	public final static String VENDOR_NAME="Поставщик 1";
+	public final static String VENDOR_TIN="100000000001";
+	public final static String VENDOR_RNN="200000000001";
+	public final static String VENDOR_ADDRESS="Проспект Победы, 1";
+
 	
 	public static Calendar calendarFor(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
@@ -167,5 +172,72 @@ public final class EntitiesHelper {
 
 
 
+	//Vendor
+
+	public static Vendor newVendor() {
+		Vendor vendor = new Vendor();
+		vendor.setId(1l);
+		vendor.setName(VENDOR_NAME);
+		vendor.setRnn(VENDOR_RNN);
+		vendor.setTin(VENDOR_TIN);
+		vendor.setAddress(VENDOR_ADDRESS);
+		
+		return vendor;
+	}
+	
+	public static Vendor newVendor(Long id) {
+		Vendor vendor = newVendor();
+		vendor.setId(id);
+		return vendor;
+	}
+	
+	
+	public static void assertVendor(Vendor vendor) {
+		assertNotNull(vendor);
+		assertNotNull(vendor.getId());
+		assertTrue(vendor.getId()>0);
+		assertEquals(VENDOR_NAME, vendor.getName());
+		assertEquals(VENDOR_RNN, vendor.getRnn() );
+		assertEquals(VENDOR_TIN, vendor.getTin() );
+		assertEquals(VENDOR_ADDRESS, vendor.getAddress() );
+	}
+	
+	public static void assertVendor(Vendor vendor1, Vendor vendor2) {
+		assertNotNull(vendor1);
+		assertNotNull(vendor1.getId());
+		assertTrue(vendor1.getId()>0);
+		
+		assertNotNull(vendor2);
+		assertNotNull(vendor2.getId());
+		assertTrue(vendor2.getId()>0);
+		
+		assertEquals(vendor1.getId(), vendor2.getId());
+		assertEquals(vendor1.getName(), vendor2.getName());
+		assertEquals(vendor1.getRnn(), vendor2.getRnn() );
+		assertEquals(vendor1.getTin(), vendor2.getTin() );
+		assertEquals(vendor1.getAddress(), vendor2.getAddress() );
+	}
+	
+	
+	public static String vendorToJson(Vendor vendor) {
+		JSONObject body = new JSONObject();
+		
+		try {
+			if (vendor.getId()!=null) 
+				body.put("id", vendor.getId());
+				
+			if (vendor.getName()!=null) 
+				body.put("name", vendor.getName());
+			
+			if (vendor.getTin()!=null)
+				body.put("tin", vendor.getTin());
+			
+			if (vendor.getAddress()!=null)
+				body.put("address", vendor.getAddress());
+		} 
+		catch (JSONException e) {}
+		
+		return body.toString();
+	}	
 
 }

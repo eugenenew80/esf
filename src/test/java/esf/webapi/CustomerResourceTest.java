@@ -65,7 +65,7 @@ public class CustomerResourceTest extends AbstractResourceTest {
 	//Success cases
 	
 	@Test
-	public void theListCompaniesMayBeFound() {
+	public void theListCustomersMayBeFound() {
 		when(service.find(anyObject()))
 			.thenReturn(Arrays.asList(newCustomer(1L), newCustomer(2L), newCustomer(3L) ));
 		

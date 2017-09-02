@@ -3,13 +3,10 @@ package esf;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-import esf.repository.CompanyRepositoryTest;
-import esf.repository.CustomerRepositoryTest;
+import esf.repository.*;
 import esf.service.*;
-import esf.webapi.CompanyResourceTest;
-import esf.webapi.CustomerResourceTest;
-import esf.webapi.integration.CompanyResourceIntTest;
-import esf.webapi.integration.CustomerResourceIntTest;
+import esf.webapi.*;
+import esf.webapi.integration.*;
 
 @RunWith(Suite.class)
 @SuiteClasses({	
@@ -22,5 +19,10 @@ import esf.webapi.integration.CustomerResourceIntTest;
 	CustomerServiceTest.class,
 	CustomerResourceTest.class,
 	CustomerResourceIntTest.class,	
+	
+	VendorRepositoryTest.class,
+	VendorServiceTest.class,
+	VendorResourceTest.class,
+	VendorResourceIntTest.class,		
 })
 public class AllTests { }

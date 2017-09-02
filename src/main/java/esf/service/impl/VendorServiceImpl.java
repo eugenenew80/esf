@@ -2,6 +2,7 @@ package esf.service.impl;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.Validator;
 
 import esf.common.exception.EntityNotFoundException;
 import esf.common.exception.InvalidArgumentException;
@@ -16,8 +17,8 @@ import esf.service.VendorService;
 public class VendorServiceImpl extends AbstractEntityService<Vendor> implements VendorService {
 
 	@Inject
-    public VendorServiceImpl(Repository<Vendor> repository) {
-        super(repository);
+    public VendorServiceImpl(Repository<Vendor> repository, Validator validator) {
+		super(repository, validator);
     }	
 	
 	@Override

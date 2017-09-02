@@ -48,7 +48,7 @@ public class CustomerServiceTest {
 	//Success cases
 	
 	@Test
-	public void theListCompaniesMayBeFound() {
+	public void theListCustomersMayBeFound() {
 		when(mockRepository.selectAll())
 			.thenReturn(Arrays.asList(newCustomer(1L), newCustomer(2L), newCustomer(3L) ));
 		
@@ -66,7 +66,7 @@ public class CustomerServiceTest {
 	
 
 	@Test
-	public void theListCompaniesMayBeFoundByQuery() {
+	public void theListCustomersMayBeFoundByQuery() {
 		Query query = QueryImpl.builder().build();		
 		when(mockRepository.select(query))
 			.thenReturn(Arrays.asList(newCustomer(1L), newCustomer(2L), newCustomer(3L) ));
@@ -99,12 +99,12 @@ public class CustomerServiceTest {
 
 	@Test
 	public void existingCustomerMayBeFoundByName() {
-		when(mockRepository.selectByName(COMPANY_NAME))
+		when(mockRepository.selectByName(CUSTOMER_NAME))
 			.thenReturn(newCustomer(1L));		
 		
-		Customer customer = service.findByName(COMPANY_NAME);		
+		Customer customer = service.findByName(CUSTOMER_NAME);		
 		
-		verify(mockRepository, times(1)).selectByName(COMPANY_NAME);
+		verify(mockRepository, times(1)).selectByName(CUSTOMER_NAME);
 		assertThat(customer, is(not(nullValue())));
 		assertCustomer(customer);
 	}
@@ -112,12 +112,12 @@ public class CustomerServiceTest {
 
 	@Test
 	public void existingCustomerMayBeFoundByTin() {
-		when(mockRepository.selectByTin(COMPANY_TIN))
+		when(mockRepository.selectByTin(CUSTOMER_TIN))
 			.thenReturn(newCustomer(1L));		
 		
-		Customer customer = service.findByTin(COMPANY_TIN);		
+		Customer customer = service.findByTin(CUSTOMER_TIN);		
 		
-		verify(mockRepository, times(1)).selectByTin(COMPANY_TIN);
+		verify(mockRepository, times(1)).selectByTin(CUSTOMER_TIN);
 		assertThat(customer, is(not(nullValue())));
 		assertCustomer(customer);
 	}	
@@ -243,14 +243,14 @@ public class CustomerServiceTest {
 	@Test(expected=RepositoryNotFoundException.class)
 	public void failMethodFindByNameIfRepositoryIsNull() {		
 		service.setRepository(null);
-		service.findByName(COMPANY_NAME);		
+		service.findByName(CUSTOMER_NAME);		
 	}
 	
 
 	@Test(expected=RepositoryNotFoundException.class)
 	public void failMethodFindByTinIfRepositoryIsNull() {		
 		service.setRepository(null);
-		service.findByTin(COMPANY_TIN);		
+		service.findByTin(CUSTOMER_TIN);		
 	}
 	
 	
@@ -344,7 +344,7 @@ public class CustomerServiceTest {
 		when(mockRepository.selectByName(anyString()))
 			.thenReturn(null);		
 		
-		service.findByName(COMPANY_NAME);
+		service.findByName(CUSTOMER_NAME);
 	}
 
 
@@ -353,7 +353,7 @@ public class CustomerServiceTest {
 		when(mockRepository.selectByTin(anyString()))
 			.thenReturn(null);		
 		
-		service.findByTin(COMPANY_TIN);
+		service.findByTin(CUSTOMER_TIN);
 	}
 	
 	

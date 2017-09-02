@@ -82,25 +82,25 @@ public class CustomerRepositoryTest {
 	
 	
 	@Test
-	public void theListCompaniesMayBeSelectedByQuery() {
+	public void theListCustomersMayBeSelectedByQuery() {
 		Query query = QueryImpl.builder()
 			.setParameter("name", new MyQueryParam("name", "Заказчик 1%", ConditionType.LIKE))
 			.build();		
 		
-		List<Customer> companies = repository.select(query);			
-		assertThat(companies, is(not(nullValue())));
-		assertThat(companies, is(not(empty())));
-		assertThat(companies, hasSize(1));
-		assertThat(companies.get(0), is(not(nullValue())));
-		assertThat(companies.get(0).getId(), is(equalTo(1L)));
-		assertCustomer(companies.get(0));		
+		List<Customer> customers = repository.select(query);			
+		assertThat(customers, is(not(nullValue())));
+		assertThat(customers, is(not(empty())));
+		assertThat(customers, hasSize(1));
+		assertThat(customers.get(0), is(not(nullValue())));
+		assertThat(customers.get(0).getId(), is(equalTo(1L)));
+		assertCustomer(customers.get(0));		
 		
 		
 		query = QueryImpl.builder().build();					
-		companies = repository.select(query);			
-		assertThat(companies, is(not(nullValue())));
-		assertThat(companies, is(not(empty())));
-		assertThat(companies, hasSize(3));
+		customers = repository.select(query);			
+		assertThat(customers, is(not(nullValue())));
+		assertThat(customers, is(not(empty())));
+		assertThat(customers, hasSize(3));
 	}	
 	
 	

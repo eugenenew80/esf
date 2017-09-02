@@ -66,7 +66,7 @@ public class CustomerResourceIntTest extends AbstractResourceTest {
 	//Success cases
 	
 	@Test
-	public void theListCompaniesMayBeFound() {
+	public void theListCustomersMayBeFound() {
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
