@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<xx_customer_site customer_site_id="1" customer_id="1" site_num="001" site_date="2017-01-01" />
+	<xx_customer_site customer_site_id="2" customer_id="2" site_num="002" site_date="2017-01-01" />
+	<xx_customer_site customer_site_id="3" customer_id="3" site_num="003" site_date="2017-01-01" />
+</dataset>
