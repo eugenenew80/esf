@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<xx_ap_vendor id="1" name="Поставщик 1" tin="100000000001" rnn="200000000001" address="Проспект Победы, 1" />
+	<xx_ap_vendor id="2" name="Поставщик 2" tin="100000000002" rnn="200000000002" address="Проспект Победы, 2" />
+	<xx_ap_vendor id="3" name="Поставщик 3" tin="100000000003" rnn="200000000003" address="Проспект Победы, 3" />
+</dataset>
