@@ -2,6 +2,7 @@ package esf.service.impl;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.validation.Validator;
 
 import esf.common.repository.Repository;
 import esf.common.service.AbstractEntityService;
@@ -12,7 +13,7 @@ import esf.service.ResponsibilityService;
 public class ResponsibilityServiceImpl extends AbstractEntityService<Responsibility> implements ResponsibilityService {
     
 	@Inject
-    public ResponsibilityServiceImpl(Repository<Responsibility> repository) {
-        super(repository);
+    public ResponsibilityServiceImpl(Repository<Responsibility> repository, Validator validator) {
+		super(repository, validator);
     }	
 }
