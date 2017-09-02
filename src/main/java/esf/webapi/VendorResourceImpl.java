@@ -102,6 +102,13 @@ public class VendorResourceImpl {
 	}	
 	
 	
+	@Path("/{vendorId : \\d+}/deliveryItem")
+	public ApDeliveryItemResourceImpl getDeliveryItem() {
+		return deliveryItemResource;
+	}
+	
+	
 	@Inject private VendorService vendorService;
+	@Inject private ApDeliveryItemResourceImpl deliveryItemResource;
 	private DozerBeanMapper mapper;
 }

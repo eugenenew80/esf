@@ -2,44 +2,39 @@ package esf.webapi;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import org.dozer.DozerBeanMapper;
 import esf.common.repository.query.*;
-import esf.entity.Vendor;
-import esf.entity.dto.VendorDto;
-import esf.service.VendorService;
-
+import esf.entity.ApDeliveryItem;
+import esf.entity.dto.ApDeliveryItemDto;
+import esf.service.ApDeliveryItemService;
 
 @RequestScoped
-@Path("/apDeliverItem")
-@Produces({ "application/xml", "application/json" })
-@Consumes({ "application/xml", "application/json" })
 public class ApDeliveryItemResourceImpl {
-	
-	
+		
 	public ApDeliveryItemResourceImpl() {
 		mapper = new DozerBeanMapper();
-		mapper.setMappingFiles(Arrays.asList("mapping/VendorDtoMapping.xml"));		
+		mapper.setMappingFiles(Arrays.asList("mapping/ApDeliveryItemDtoMapping.xml"));		
 	}
 
 
 	@GET
-	public Response getAll(@QueryParam("name") @DefaultValue("") String name) {
-		
+	public Response getAll(@PathParam("vendorId") Long vendorId) {
 		Query query = QueryImpl.builder()
-			.setParameter("name", new MyQueryParam("name", name + "%", ConditionType.LIKE))
+			.setParameter("vendor.id", new MyQueryParam("vendorId", vendorId, ConditionType.EQUALS))
 			.build();		
 		
-		List<VendorDto> list = vendorService.find(query)
+		List<ApDeliveryItemDto> list = deliveryItemService.find(query)
 			.stream()
-			.map( it-> mapper.map(it, VendorDto.class) )
+			.map( it-> mapper.map(it, ApDeliveryItemDto.class) )
 			.collect(Collectors.toList());
 		
 		return Response.ok()
-			.entity(new GenericEntity<Collection<VendorDto>>(list){})
+			.entity(new GenericEntity<Collection<ApDeliveryItemDto>>(list){})
 			.build();
 	}
 	
@@ -47,48 +42,28 @@ public class ApDeliveryItemResourceImpl {
 	@GET 
 	@Path("/{id : \\d+}") 
 	public Response getById(@PathParam("id") Long id) {
-		Vendor vendor = vendorService.findById(id);
+		ApDeliveryItem deliveryItem = deliveryItemService.findById(id);
 		return Response.ok()
-			.entity(mapper.map(vendor, VendorDto.class))
+			.entity(mapper.map(deliveryItem, ApDeliveryItemDto.class))
 			.build();		
 	}
 	
-
-	@GET
-	@Path("/byName/{name}")
-	public Response getByName(@PathParam("name") String name) {		
-		Vendor vendor = vendorService.findByName(name);
-		return Response.ok()
-			.entity(mapper.map(vendor, VendorDto.class))
-			.build();
-	}
-	
-	
-	@GET 
-	@Path("/byTin/{tin}") 
-	public Response getByTin(@PathParam("tin") String tin) {
-		Vendor vendor = vendorService.findByTin(tin);
-		return Response.ok()
-			.entity(mapper.map(vendor, VendorDto.class))
-			.build();		
-	}
-
 
 	@POST
-	public Response create(VendorDto vendorDto) {
-		Vendor newVendor = vendorService.create(mapper.map(vendorDto, Vendor.class));	
+	public Response create(ApDeliveryItemDto deliveryItemDto) {
+		ApDeliveryItem newApDeliveryItem = deliveryItemService.create(mapper.map(deliveryItemDto, ApDeliveryItem.class));	
 		return Response.ok()
-			.entity(mapper.map(newVendor, VendorDto.class))
+			.entity(mapper.map(newApDeliveryItem, ApDeliveryItemDto.class))
 			.build();
 	}
 	
 	
 	@PUT 
 	@Path("{id : \\d+}") 
-	public Response update(@PathParam("id") Long id, VendorDto vendorDto ) {
-		Vendor newVendor = vendorService.update(mapper.map(vendorDto, Vendor.class)); 
+	public Response update(@PathParam("id") Long id, ApDeliveryItemDto deliveryItemDto ) {
+		ApDeliveryItem newApDeliveryItem = deliveryItemService.update(mapper.map(deliveryItemDto, ApDeliveryItem.class)); 
 		return Response.ok()
-			.entity(mapper.map(newVendor, VendorDto.class))
+			.entity(mapper.map(newApDeliveryItem, ApDeliveryItemDto.class))
 			.build();
 	}
 	
@@ -96,12 +71,12 @@ public class ApDeliveryItemResourceImpl {
 	@DELETE 
 	@Path("{id : \\d+}") 
 	public Response delete(@PathParam("id") Long id) {
-		vendorService.delete(id);		
+		deliveryItemService.delete(id);		
 		return Response.noContent()
 			.build();
 	}	
 	
 	
-	@Inject private VendorService vendorService;
+	@Inject private ApDeliveryItemService deliveryItemService;
 	private DozerBeanMapper mapper;
 }
