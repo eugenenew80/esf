@@ -66,7 +66,7 @@
 			return {
 				//baseUrl: "http://10.9.41.187:8080/"
 				//baseUrl: "http://10.9.40.29:8080/"	
-				baseUrl: "http://localhost:8080/"
+				baseUrl: "http://localhost:49365/"
 			}
 		});
 })()
