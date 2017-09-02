@@ -4,6 +4,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import esf.common.entity.HasId;
+import esf.entity.Vendor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,4 +19,5 @@ public class ApDeliveryItem implements HasId {
 	private String destination;
 	private String exerciseWay;
 	private String term;
+	private Vendor vendor;
 }

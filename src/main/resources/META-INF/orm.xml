@@ -193,7 +193,11 @@
       		
       		<basic name="term">
       			<column name="term" />
-      		</basic>     		     		     		
+      		</basic>     		   
+      		
+			<many-to-one name="customer">
+				<join-column name="customer_id"/>
+			</many-to-one> 	      		  		     		
 		</attributes>
 	</entity>	
 	
@@ -347,6 +351,10 @@
       		<basic name="term">
       			<column name="term" />
       		</basic>     		     		     		
+
+			<many-to-one name="vendor">
+				<join-column name="vendor_id"/>
+			</many-to-one> 	      		  		     		
 		</attributes>
 	</entity>	
 	
