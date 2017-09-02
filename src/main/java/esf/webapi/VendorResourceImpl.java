@@ -1,25 +1,13 @@
 package esf.webapi;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.GenericEntity;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
 import org.dozer.DozerBeanMapper;
-import esf.common.repository.query.ConditionType;
-import esf.common.repository.query.MyQueryParam;
-import esf.common.repository.query.Query;
-import esf.common.repository.query.QueryImpl;
+import esf.common.repository.query.*;
 import esf.entity.Vendor;
 import esf.entity.dto.VendorDto;
 import esf.service.VendorService;
@@ -79,13 +67,41 @@ public class VendorResourceImpl {
 	@GET 
 	@Path("/byTin/{tin}") 
 	public Response getByTin(@PathParam("tin") String tin) {
-		Vendor customer = vendorService.findByTin(tin);
+		Vendor vendor = vendorService.findByTin(tin);
 		return Response.ok()
-			.entity(mapper.map(customer, VendorDto.class))
+			.entity(mapper.map(vendor, VendorDto.class))
 			.build();		
 	}
 
-	 
+
+	@POST
+	public Response create(VendorDto vendorDto) {
+		Vendor newVendor = vendorService.create(mapper.map(vendorDto, Vendor.class));	
+		return Response.ok()
+			.entity(mapper.map(newVendor, VendorDto.class))
+			.build();
+	}
+	
+	
+	@PUT 
+	@Path("{id : \\d+}") 
+	public Response update(@PathParam("id") Long id, VendorDto vendorDto ) {
+		Vendor newVendor = vendorService.update(mapper.map(vendorDto, Vendor.class)); 
+		return Response.ok()
+			.entity(mapper.map(newVendor, VendorDto.class))
+			.build();
+	}
+	
+	
+	@DELETE 
+	@Path("{id : \\d+}") 
+	public Response delete(@PathParam("id") Long id) {
+		vendorService.delete(id);		
+		return Response.noContent()
+			.build();
+	}	
+	
+	
 	@Inject private VendorService vendorService;
 	private DozerBeanMapper mapper;
 }
