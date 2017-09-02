@@ -27,11 +27,11 @@ public class Vendor implements HasId, HasName {
 	private String name;
 	
 	@NotNull @Size(min=12, max = 12)
-	private String rnn;
+	private String tin;
 
 	private String address;
 	private CustomerType status;
-	private String tin;
+	private String rnn;	
 	private String countryCode;
 	private String trailer;
 }
