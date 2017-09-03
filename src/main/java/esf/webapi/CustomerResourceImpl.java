@@ -101,12 +101,13 @@ public class CustomerResourceImpl {
 	
 	
 	@Path("/{customerId : \\d+}/customerSite")
-	public CustomerSiteResourceImpl getCustomerSite() {
-		return customerSiteResource;
+	public Class<CustomerSiteResourceImpl> getCustomerSite() {
+		//return customerSiteResource;
+		return CustomerSiteResourceImpl.class;
 	}
 	
 	
 	@Inject private CustomerService customerService;
-	@Inject private CustomerSiteResourceImpl customerSiteResource;
+	//@Inject private CustomerSiteResourceImpl customerSiteResource;
 	private DozerBeanMapper mapper;
 }
