@@ -48,6 +48,7 @@ public class CustomerResourceTest extends AbstractResourceTest {
 		setBinder(new AbstractBinder() {
 			protected void configure() {
 				bind(service).to(CustomerService.class);
+				bind(new CustomerSiteResourceImpl()).to(CustomerSiteResourceImpl.class);
 			}
 		});
 

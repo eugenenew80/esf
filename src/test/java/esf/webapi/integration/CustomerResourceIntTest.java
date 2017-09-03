@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import com.jayway.restassured.http.ContentType;
 import esf.webapi.CustomerResourceImpl;
+import esf.webapi.CustomerSiteResourceImpl;
 import esf.webapi.helper.AbstractResourceTest;
 import esf.webapi.helper.Binding;
 import org.glassfish.hk2.api.TypeLiteral;
@@ -47,6 +48,7 @@ public class CustomerResourceIntTest extends AbstractResourceTest {
 			protected void configure() {
 				bind(new CustomerRepositoryImpl(dbUnitHelper.getEntityManager())).to(new TypeLiteral<Repository<Customer>>() {});
 				bind(CustomerServiceImpl.class).to(CustomerService.class);
+				bind(new CustomerSiteResourceImpl()).to(CustomerSiteResourceImpl.class);
 			}
 		});
 
