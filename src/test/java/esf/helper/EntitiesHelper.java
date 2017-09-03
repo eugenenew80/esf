@@ -43,6 +43,7 @@ public final class EntitiesHelper {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
+        cal.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         return cal;
     }
 	

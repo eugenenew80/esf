@@ -11,6 +11,8 @@ import static org.hamcrest.Matchers.nullValue;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.TimeZone;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -49,6 +51,7 @@ public class CustomerRepositoryTest {
 	
 	@Before
 	public void setUp() throws Exception {		
+		TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
 		dbUnitHelper.beginTransaction();
 		dbUnitHelper.cleanAndInsert(dataSetList);
 	}
