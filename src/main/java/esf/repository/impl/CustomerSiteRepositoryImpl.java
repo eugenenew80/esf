@@ -14,4 +14,11 @@ public class CustomerSiteRepositoryImpl extends AbstractRepository<CustomerSite>
 		this();
 		setEntityManager(entityManager);
 	}
+
+	@Override
+	public CustomerSite selectByName(String entityName) {
+		throw new UnsupportedOperationException("Repository doesn't support this method");
+	}
+	
+	
 }
