@@ -12,13 +12,11 @@ import esf.entity.Customer;
 import esf.entity.dto.CustomerDto;
 import esf.service.CustomerService;
 
-
 @RequestScoped
 @Path("/customer")
 @Produces({ "application/xml", "application/json" })
 @Consumes({ "application/xml", "application/json" })
 public class CustomerResourceImpl {
-	
 	
 	public CustomerResourceImpl() {
 		mapper = new DozerBeanMapper();
@@ -102,6 +100,13 @@ public class CustomerResourceImpl {
 	}	
 	
 	
+	@Path("/{customerId : \\d+}/customerSite")
+	public CustomerSiteResourceImpl getCustomerSite() {
+		return customerSiteResource;
+	}
+	
+	
 	@Inject private CustomerService customerService;
+	@Inject private CustomerSiteResourceImpl customerSiteResource;
 	private DozerBeanMapper mapper;
 }

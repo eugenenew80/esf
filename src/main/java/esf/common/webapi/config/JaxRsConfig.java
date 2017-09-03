@@ -17,6 +17,7 @@ import esf.service.impl.AuthServiceImpl;
 import esf.webapi.ConsigneeResourceImpl;
 import esf.webapi.CompanyResourceImpl;
 import esf.webapi.CustomerResourceImpl;
+import esf.webapi.CustomerSiteResourceImpl;
 import esf.webapi.VendorSiteResourceImpl;
 import esf.webapi.ApInvoiceResourceImpl;
 import esf.webapi.ArInvoiceResourceImpl;
@@ -39,6 +40,7 @@ public class JaxRsConfig extends Application {
 		resources.add(VendorResourceImpl.class);
 		resources.add(AuthServiceImpl.class);
 		resources.add(VendorSiteResourceImpl.class);
+		resources.add(CustomerSiteResourceImpl.class);
 		
 		resources.add(RepositryNotFoundExceptionMapperImpl.class);
 		resources.add(EntityNotFoundExceptionMapperImpl.class);

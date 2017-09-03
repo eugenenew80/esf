@@ -14,4 +14,9 @@ public class VendorSiteRepositoryImpl extends AbstractRepository<VendorSite> imp
 		this();
 		setEntityManager(entityManager);
 	}
+
+	@Override
+	public VendorSite selectByName(String entityName) {
+		throw new UnsupportedOperationException("Repository doesn't support this method");
+	}	
 }

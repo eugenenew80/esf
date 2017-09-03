@@ -154,4 +154,12 @@ public class VendorSiteRepositoryTest {
 		VendorSite vendorSite = repository.selectById(1L);
 		assertThat(vendorSite, is(nullValue()));
 	}	
+	
+	
+	//Fail cases
+	
+	@Test(expected = UnsupportedOperationException.class )
+	public void failMethodSelectByName() {
+		repository.selectByName("Бла бла бла");
+	}
 } 
