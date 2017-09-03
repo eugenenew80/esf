@@ -116,7 +116,7 @@
       
         
         .factory("apConsignee", function (apDataServiceFactory, apResourceFactory) {
-            return apDataServiceFactory.newInstance(apResourceFactory.newInstance('consignee'));
+            return apDataServiceFactory.newInstance(apResourceFactory.newInstance('vendor'));
         })
             
 })();

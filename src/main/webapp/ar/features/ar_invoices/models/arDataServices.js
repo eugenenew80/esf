@@ -125,7 +125,7 @@
       
         
         .factory("arConsignee", function (arDataServiceFactory, arResourceFactory) {
-            return arDataServiceFactory.newInstance(arResourceFactory.newInstance('consignee'));
+            return arDataServiceFactory.newInstance(arResourceFactory.newInstance('customer'));
         })
         
         

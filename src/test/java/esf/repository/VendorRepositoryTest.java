@@ -39,6 +39,7 @@ public class VendorRepositoryTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		dbUnitHelper = new DBUnitHelper(); 
 		repository = new VendorRepositoryImpl(dbUnitHelper.getEntityManager());;
 	}
@@ -51,7 +52,6 @@ public class VendorRepositoryTest {
 	
 	@Before
 	public void setUp() throws Exception {		
-		TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
 		dbUnitHelper.beginTransaction();
 		dbUnitHelper.cleanAndInsert(dataSetList);
 	}

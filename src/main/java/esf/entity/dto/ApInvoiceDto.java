@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import esf.entity.VendorSite;
-import esf.entity.ApProduct;
+import esf.entity.ApInvoiceLine;
 import esf.entity.Company;
 import esf.entity.InvoiceStatus;
 import esf.entity.InvoiceType;
@@ -23,7 +23,7 @@ public class ApInvoiceDto {
 	private Vendor seller;
 	private Vendor consignor;
 	private VendorSite deliveryItem;
-	private Set<ApProduct> products;
+	private Set<ApInvoiceLine> products;
 	private Date turnoverDate;
 	private InvoiceStatus status;
 	private String currencyCode;

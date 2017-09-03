@@ -12,6 +12,6 @@ public class AppConfig {
 
 	@PostConstruct
 	private void init() {
-		TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 	}
 }

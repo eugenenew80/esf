@@ -30,7 +30,7 @@ public class ArInvoice implements HasId {
 	private Company seller;
 	private Company consignor;	
 	private CustomerSite deliveryItem;
-	private Set<ArProduct> products;
+	private Set<ArInvoiceLine> lines;
 	private Date turnoverDate;
 	private InvoiceStatus status;
 	private String currencyCode;
@@ -39,21 +39,21 @@ public class ArInvoice implements HasId {
 	
 	@Transient
 	public Double getTotalNdsAmount() {
-		return getProducts().stream()
+		return getLines().stream()
 				.mapToDouble(d -> Optional.ofNullable(d.getNdsAmount()).orElse(0d))
 				.sum();
 	}
 	
 	@Transient
 	public Double getTotalPriceWithTax() {
-		return getProducts().stream()
+		return getLines().stream()
 				.mapToDouble(d -> Optional.ofNullable(d.getPriceWithTax()).orElse(0d))
 				.sum();
 	}
 	
 	@Transient
 	public Double getTotalPriceWithoutTax() {
-		return getProducts().stream()
+		return getLines().stream()
 				.mapToDouble(d -> Optional.ofNullable(d.getPriceWithoutTax()).orElse(0d))
 				.sum();
 	}	

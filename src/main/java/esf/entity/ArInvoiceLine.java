@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(of= {"id"})
-public class ApProduct {
+public class ArInvoiceLine {
 	private Long id;
 	private String description;
 	private Double ndsAmount;
@@ -19,5 +19,5 @@ public class ApProduct {
 	private Double turnoverSize;
 	private String unitNomenclature;
 	private Double unitPrice;
-	private ApInvoice invoice;
+	private ArInvoice invoice;
 }

@@ -38,6 +38,7 @@ public class CompanyRepositoryTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		dbUnitHelper = new DBUnitHelper(); 
 		repository = new CompanyRepositoryImpl(dbUnitHelper.getEntityManager());;
 	}
@@ -50,7 +51,6 @@ public class CompanyRepositoryTest {
 	
 	@Before
 	public void setUp() throws Exception {		
-		TimeZone.setDefault(TimeZone.getTimeZone("Etc/UTC"));
 		dbUnitHelper.beginTransaction();
 		dbUnitHelper.cleanAndInsert(dataSetList);
 	}

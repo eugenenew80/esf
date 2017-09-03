@@ -30,7 +30,7 @@ public class ApInvoice implements HasId {
 	private Vendor seller;
 	private Vendor consignor;
 	private VendorSite deliveryItem;
-	private Set<ApProduct> products;
+	private Set<ApInvoiceLine> lines;
 	private Date turnoverDate;
 	private InvoiceStatus status;
 	private String currencyCode;
@@ -39,21 +39,21 @@ public class ApInvoice implements HasId {
 	
 	@Transient
 	public Double getTotalNdsAmount() {
-		return getProducts().stream()
+		return getLines().stream()
 				.mapToDouble(d -> Optional.ofNullable(d.getNdsAmount()).orElse(0d))
 				.sum();
 	}
 	
 	@Transient
 	public Double getTotalPriceWithTax() {
-		return getProducts().stream()
+		return getLines().stream()
 				.mapToDouble(d -> Optional.ofNullable(d.getPriceWithTax()).orElse(0d))
 				.sum();
 	}
 	
 	@Transient
 	public Double getTotalPriceWithoutTax() {
-		return getProducts().stream()
+		return getLines().stream()
 				.mapToDouble(d -> Optional.ofNullable(d.getPriceWithoutTax()).orElse(0d))
 				.sum();
 	}	
