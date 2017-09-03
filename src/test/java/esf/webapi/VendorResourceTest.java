@@ -48,7 +48,7 @@ public class VendorResourceTest extends AbstractResourceTest {
 		setBinder(new AbstractBinder() {
 			protected void configure() {
 				bind(service).to(VendorService.class);
-				bind(new ApDeliveryItemResourceImpl()).to(ApDeliveryItemResourceImpl.class);
+				bind(new VendorSiteResourceImpl()).to(VendorSiteResourceImpl.class);
 			}
 		});
 

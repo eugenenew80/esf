@@ -29,7 +29,7 @@ public class ApInvoice implements HasId {
 	private Company consignee;
 	private Vendor seller;
 	private Vendor consignor;
-	private ApDeliveryItem deliveryItem;
+	private VendorSite deliveryItem;
 	private Set<ApProduct> products;
 	private Date turnoverDate;
 	private InvoiceStatus status;

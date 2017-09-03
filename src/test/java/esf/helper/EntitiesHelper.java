@@ -28,10 +28,10 @@ public final class EntitiesHelper {
 	public final static String VENDOR_ADDRESS="Проспект Победы, 1";
 	
 	public final static String VENDOR_SITE_NUM="001";
-	public final static Date VENDOR_SITE_DATE=calendarFor(2017, 1, 1).getTime();
+	public final static Date VENDOR_SITE_DATE=calendarFor(2017, 0, 1).getTime();
 	
 	public final static String CUSTOMER_SITE_NUM="001";
-	public final static Date CUSTOMER_SITE_DATE=calendarFor(2017, 1, 1).getTime();
+	public final static Date CUSTOMER_SITE_DATE=calendarFor(2017, 0, 1).getTime();
 
 	
 	public static Calendar calendarFor(int year, int month, int day) {
@@ -39,6 +39,10 @@ public final class EntitiesHelper {
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
         return cal;
     }
 	
@@ -251,60 +255,60 @@ public final class EntitiesHelper {
 
 	//VendorSite
 
-	public static ApDeliveryItem newApDeliveryItem() {
-		ApDeliveryItem deliveryItem = new ApDeliveryItem();
-		deliveryItem.setId(1l);
-		deliveryItem.setContractNum(VENDOR_SITE_NUM);
-		deliveryItem.setContractDate(VENDOR_SITE_DATE);
-		deliveryItem.setVendor(newVendor(1L));
-		return deliveryItem;
+	public static VendorSite newVendorSite() {
+		VendorSite vendorSite = new VendorSite();
+		vendorSite.setId(1l);
+		vendorSite.setContractNum(VENDOR_SITE_NUM);
+		vendorSite.setContractDate(VENDOR_SITE_DATE);
+		vendorSite.setVendor(newVendor(1L));
+		return vendorSite;
 	}
 	
-	public static ApDeliveryItem newApDeliveryItem(Long id) {
-		ApDeliveryItem deliveryItem = new ApDeliveryItem();
-		deliveryItem.setId(id);
-		return deliveryItem;
+	public static VendorSite newVendorSite(Long id) {
+		VendorSite vendorSite = newVendorSite();
+		vendorSite.setId(id);
+		return vendorSite;
 	}
 
-	public static void assertApDeliveryItem(ApDeliveryItem deliveryItem) {
-		assertNotNull(deliveryItem);
-		assertNotNull(deliveryItem.getId());
-		assertTrue(deliveryItem.getId()>0);
-		assertEquals(VENDOR_SITE_NUM, deliveryItem.getContractNum());
-		assertEquals(VENDOR_SITE_DATE, deliveryItem.getContractDate());
-		assertVendor(deliveryItem.getVendor());
+	public static void assertVendorSite(VendorSite vendorSite) {
+		assertNotNull(vendorSite);
+		assertNotNull(vendorSite.getId());
+		assertTrue(vendorSite.getId()>0);
+		assertEquals(VENDOR_SITE_NUM, vendorSite.getContractNum());
+		assertEquals(VENDOR_SITE_DATE, vendorSite.getContractDate());
+		assertVendor(vendorSite.getVendor());
 	}
 
-	public static void assertApDeliveryItem(ApDeliveryItem deliveryItem1, ApDeliveryItem deliveryItem2) {
-		assertNotNull(deliveryItem1);
-		assertNotNull(deliveryItem1.getId());
-		assertTrue(deliveryItem1.getId()>0);
+	public static void assertVendorSite(VendorSite vendorSite1, VendorSite vendorSite2) {
+		assertNotNull(vendorSite1);
+		assertNotNull(vendorSite1.getId());
+		assertTrue(vendorSite1.getId()>0);
 		
-		assertNotNull(deliveryItem2);
-		assertNotNull(deliveryItem2.getId());
-		assertTrue(deliveryItem2.getId()>0);
+		assertNotNull(vendorSite2);
+		assertNotNull(vendorSite2.getId());
+		assertTrue(vendorSite2.getId()>0);
 		
-		assertEquals(deliveryItem1.getId(), deliveryItem2.getId());
-		assertEquals(deliveryItem1.getContractNum(), deliveryItem2.getContractNum());
-		assertEquals(deliveryItem1.getContractDate(), deliveryItem2.getContractDate());
-		assertVendor(deliveryItem1.getVendor(), deliveryItem2.getVendor() );
+		assertEquals(vendorSite1.getId(), vendorSite2.getId());
+		assertEquals(vendorSite1.getContractNum(), vendorSite2.getContractNum());
+		assertEquals(vendorSite1.getContractDate(), vendorSite2.getContractDate());
+		assertVendor(vendorSite1.getVendor(), vendorSite2.getVendor() );
 	}
 
-	public static String apDeliveryItemToJson(ApDeliveryItem deliveryItem) {
+	public static String vendorSiteToJson(VendorSite vendorSite) {
 		JSONObject body = new JSONObject();
 		
 		try {
-			if (deliveryItem.getId()!=null) 
-				body.put("id", deliveryItem.getId());
+			if (vendorSite.getId()!=null) 
+				body.put("id", vendorSite.getId());
 				
-			if (deliveryItem.getContractNum()!=null) 
-				body.put("contractNum", deliveryItem.getContractNum());
+			if (vendorSite.getContractNum()!=null) 
+				body.put("contractNum", vendorSite.getContractNum());
 			
-			if (deliveryItem.getContractDate()!=null)
-				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd").format(deliveryItem.getContractDate()));
+			if (vendorSite.getContractDate()!=null)
+				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd").format(vendorSite.getContractDate()));
 			
-			if (deliveryItem.getVendor()!=null)
-				body.put("vendorId", deliveryItem.getVendor().getId());
+			if (vendorSite.getVendor()!=null)
+				body.put("vendorId", vendorSite.getVendor().getId());
 		} 
 		catch (JSONException e) {}
 		
@@ -314,60 +318,60 @@ public final class EntitiesHelper {
 
 	//CustomerSite
 
-	public static ArDeliveryItem newArDeliveryItem() {
-		ArDeliveryItem deliveryItem = new ArDeliveryItem();
-		deliveryItem.setId(1l);
-		deliveryItem.setContractNum(CUSTOMER_SITE_NUM);
-		deliveryItem.setContractDate(CUSTOMER_SITE_DATE);
-		deliveryItem.setCustomer(newCustomer(1L));
-		return deliveryItem;
+	public static CustomerSite newCustomerSite() {
+		CustomerSite customerSite = new CustomerSite();
+		customerSite.setId(1l);
+		customerSite.setContractNum(CUSTOMER_SITE_NUM);
+		customerSite.setContractDate(CUSTOMER_SITE_DATE);
+		customerSite.setCustomer(newCustomer(1L));
+		return customerSite;
 	}
 	
-	public static ArDeliveryItem newArDeliveryItem(Long id) {
-		ArDeliveryItem deliveryItem = new ArDeliveryItem();
-		deliveryItem.setId(id);
-		return deliveryItem;
+	public static CustomerSite newCustomerSite(Long id) {
+		CustomerSite customerSite = newCustomerSite();
+		customerSite.setId(id);
+		return customerSite;
 	}
 
-	public static void assertArDeliveryItem(ArDeliveryItem deliveryItem) {
-		assertNotNull(deliveryItem);
-		assertNotNull(deliveryItem.getId());
-		assertTrue(deliveryItem.getId()>0);
-		assertEquals(CUSTOMER_SITE_NUM, deliveryItem.getContractNum());
-		assertEquals(CUSTOMER_SITE_DATE, deliveryItem.getContractDate());
-		assertCustomer(deliveryItem.getCustomer());
+	public static void assertCustomerSite(CustomerSite customerSite) {
+		assertNotNull(customerSite);
+		assertNotNull(customerSite.getId());
+		assertTrue(customerSite.getId()>0);
+		assertEquals(CUSTOMER_SITE_NUM, customerSite.getContractNum());
+		assertEquals(CUSTOMER_SITE_DATE, customerSite.getContractDate());
+		assertCustomer(customerSite.getCustomer());
 	}
 
-	public static void assertArDeliveryItem(ArDeliveryItem deliveryItem1, ArDeliveryItem deliveryItem2) {
-		assertNotNull(deliveryItem1);
-		assertNotNull(deliveryItem1.getId());
-		assertTrue(deliveryItem1.getId()>0);
+	public static void assertCustomerSite(CustomerSite customerSite1, CustomerSite customerSite2) {
+		assertNotNull(customerSite1);
+		assertNotNull(customerSite1.getId());
+		assertTrue(customerSite1.getId()>0);
 		
-		assertNotNull(deliveryItem2);
-		assertNotNull(deliveryItem2.getId());
-		assertTrue(deliveryItem2.getId()>0);
+		assertNotNull(customerSite2);
+		assertNotNull(customerSite2.getId());
+		assertTrue(customerSite2.getId()>0);
 		
-		assertEquals(deliveryItem1.getId(), deliveryItem2.getId());
-		assertEquals(deliveryItem1.getContractNum(), deliveryItem2.getContractNum());
-		assertEquals(deliveryItem1.getContractDate(), deliveryItem2.getContractDate());
-		assertCustomer(deliveryItem1.getCustomer(), deliveryItem2.getCustomer() );
+		assertEquals(customerSite1.getId(), customerSite2.getId());
+		assertEquals(customerSite1.getContractNum(), customerSite2.getContractNum());
+		assertEquals(customerSite1.getContractDate(), customerSite2.getContractDate());
+		assertCustomer(customerSite1.getCustomer(), customerSite2.getCustomer() );
 	}
 
-	public static String arDeliveryItemToJson(ArDeliveryItem deliveryItem) {
+	public static String customerSiteToJson(CustomerSite customerSite) {
 		JSONObject body = new JSONObject();
 		
 		try {
-			if (deliveryItem.getId()!=null) 
-				body.put("id", deliveryItem.getId());
+			if (customerSite.getId()!=null) 
+				body.put("id", customerSite.getId());
 				
-			if (deliveryItem.getContractNum()!=null) 
-				body.put("contractNum", deliveryItem.getContractNum());
+			if (customerSite.getContractNum()!=null) 
+				body.put("contractNum", customerSite.getContractNum());
 			
-			if (deliveryItem.getContractDate()!=null)
-				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd").format(deliveryItem.getContractDate()));
+			if (customerSite.getContractDate()!=null)
+				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd").format(customerSite.getContractDate()));
 			
-			if (deliveryItem.getCustomer()!=null)
-				body.put("customerId", deliveryItem.getCustomer().getId());
+			if (customerSite.getCustomer()!=null)
+				body.put("customerId", customerSite.getCustomer().getId());
 		} 
 		catch (JSONException e) {}
 		

@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://dozer.sourceforge.net
           http://dozer.sourceforge.net/schema/beanmapping.xsd">
   <mapping>
-    <class-a>esf.entity.ApDeliveryItem</class-a>
-    <class-b>esf.entity.dto.ApDeliveryItemDto</class-b>
+    <class-a>esf.entity.CustomerSite</class-a>
+    <class-b>esf.entity.dto.CustomerSiteDto</class-b>
   </mapping> 
 </mappings> 

@@ -23,6 +23,8 @@ import esf.webapi.integration.*;
 	VendorRepositoryTest.class,
 	VendorServiceTest.class,
 	VendorResourceTest.class,
-	VendorResourceIntTest.class
+	VendorResourceIntTest.class,
+	
+	VendorSiteRepositoryTest.class,
 })
 public class AllTests { }

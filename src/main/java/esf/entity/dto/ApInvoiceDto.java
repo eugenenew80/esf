@@ -3,7 +3,7 @@ package esf.entity.dto;
 import java.util.Date;
 import java.util.Set;
 
-import esf.entity.ApDeliveryItem;
+import esf.entity.VendorSite;
 import esf.entity.ApProduct;
 import esf.entity.Company;
 import esf.entity.InvoiceStatus;
@@ -22,7 +22,7 @@ public class ApInvoiceDto {
 	private Company consignee;
 	private Vendor seller;
 	private Vendor consignor;
-	private ApDeliveryItem deliveryItem;
+	private VendorSite deliveryItem;
 	private Set<ApProduct> products;
 	private Date turnoverDate;
 	private InvoiceStatus status;

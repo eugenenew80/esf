@@ -10,13 +10,12 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @NamedQueries({
-	@NamedQuery(name= "ApDeliveryItem.findAll",    query="select t from ApDeliveryItem t"),
+	@NamedQuery(name= "VendorSite.findAll", query="select t from VendorSite t"),
 })
-
 @Entity
 @Data
 @EqualsAndHashCode(of= {"id"})
-public class ApDeliveryItem implements HasId {
+public class VendorSite implements HasId {
 	private Long id;
 	private Date contractDate;
 	private String contractNum;

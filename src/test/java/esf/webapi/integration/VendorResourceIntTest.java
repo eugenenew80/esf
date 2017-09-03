@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import com.jayway.restassured.http.ContentType;
 
-import esf.webapi.ApDeliveryItemResourceImpl;
+import esf.webapi.VendorSiteResourceImpl;
 import esf.webapi.VendorResourceImpl;
 import esf.webapi.helper.AbstractResourceTest;
 import esf.webapi.helper.Binding;
@@ -49,7 +49,7 @@ public class VendorResourceIntTest extends AbstractResourceTest {
 			protected void configure() {
 				bind(new VendorRepositoryImpl(dbUnitHelper.getEntityManager())).to(new TypeLiteral<Repository<Vendor>>() {});
 				bind(VendorServiceImpl.class).to(VendorService.class);
-				bind(new ApDeliveryItemResourceImpl()).to(ApDeliveryItemResourceImpl.class);
+				bind(new VendorSiteResourceImpl()).to(VendorSiteResourceImpl.class);
 			}
 		});
 

@@ -161,7 +161,7 @@
 	</entity>
 	
 	
-	<entity class="esf.entity.ArDeliveryItem">
+	<entity class="esf.entity.CustomerSite">
 		<table name="xx_customer_site" schema="apps"></table>
 		<attributes>
 			<id name="id">
@@ -318,7 +318,7 @@
 
 		
 
-	<entity class="esf.entity.ApDeliveryItem">
+	<entity class="esf.entity.VendorSite">
 		<table name="xx_ap_vendor_site" schema="apps"></table>
 		<attributes>
 			<id name="id">

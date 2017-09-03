@@ -2,7 +2,7 @@ package esf.entity.dto;
 
 import java.util.Date;
 
-import esf.entity.ArDeliveryItem;
+import esf.entity.CustomerSite;
 import esf.entity.Customer;
 import esf.entity.InvoiceStatus;
 import esf.entity.InvoiceType;
@@ -28,7 +28,7 @@ public class ArInvoiceDto {
 	
 	private Seller seller;
 	
-	private ArDeliveryItem deliveryItem;
+	private CustomerSite deliveryItem;
 	private Long deliveryItemId;
 	private String contractNum;
 	private Date contractDate;

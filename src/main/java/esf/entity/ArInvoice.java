@@ -29,7 +29,7 @@ public class ArInvoice implements HasId {
 	private Customer consignee;
 	private Company seller;
 	private Company consignor;	
-	private ArDeliveryItem deliveryItem;
+	private CustomerSite deliveryItem;
 	private Set<ArProduct> products;
 	private Date turnoverDate;
 	private InvoiceStatus status;
