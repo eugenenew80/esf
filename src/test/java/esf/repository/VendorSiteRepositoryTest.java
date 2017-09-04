@@ -66,7 +66,7 @@ public class VendorSiteRepositoryTest {
 	//Success cases
 	
 	@Test
-	public void theListVendorSitesMayBeSelected() throws Exception {	
+	public void theListVendorSitesMayBeSelected() {	
 		List<VendorSite> vendorSites = repository.selectAll();
 		
 		assertThat(vendorSites, is(not(nullValue())));
@@ -107,17 +107,42 @@ public class VendorSiteRepositoryTest {
 	}	
 	
 	
+
 	@Test
-	public void existingVendorSiteMayBeSelectedById() throws Exception {
+	public void existingVendorSiteMayBeSelectedById() {
 		VendorSite vendorSite = repository.selectById(1L);
 		assertThat(vendorSite, is(not(nullValue())));
 		assertVendorSite(vendorSite);
 		
 		vendorSite = repository.selectById(4L);
 		assertThat(vendorSite, is(nullValue()));		
+	}	
+	
+	
+	@Test
+	public void existingVendorSiteMayBeSelectedByContractNum() {
+		VendorSite vendorSite = repository.selectByContractNum(1L, "001");
+		assertThat(vendorSite, is(not(nullValue())));
+		assertVendorSite(vendorSite);
 	}
 	
+
+	@Test
+	public void theListVendorSitesMayBeVendorId() {	
+		List<VendorSite> vendorSites = repository.selectByVendorId(1L);
 		
+		assertThat(vendorSites, is(not(nullValue())));
+		assertThat(vendorSites, is(not(empty())));
+		assertThat(vendorSites, hasSize(1));
+		
+		assertThat(vendorSites.get(0), is(not(nullValue())));
+		assertThat(vendorSites.get(0).getVendor(), is(not(nullValue())));
+		assertThat(vendorSites.get(0).getId(), is(equalTo(1L)));
+		assertThat(vendorSites.get(0).getVendor().getId(), is(equalTo(1L)));
+		assertVendorSite(vendorSites.get(0));
+	}
+
+	
 	@Test
 	public void newVendorSiteMayBeInserted() {
 		VendorSite origVendorSite = newVendorSite(null);

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
@@ -25,6 +24,7 @@ import esf.common.repository.query.ConditionType;
 import esf.common.repository.query.MyQueryParam;
 import esf.common.repository.query.Query;
 import esf.common.repository.query.QueryImpl;
+import esf.entity.CustomerSite;
 import esf.entity.CustomerSite;
 import esf.helper.DBUnitHelper;
 import esf.helper.DataSetLoader;
@@ -66,7 +66,7 @@ public class CustomerSiteRepositoryTest {
 	//Success cases
 	
 	@Test
-	public void theListCustomerSitesMayBeSelected() throws Exception {	
+	public void theListCustomerSitesMayBeSelected() {	
 		List<CustomerSite> customerSites = repository.selectAll();
 		
 		assertThat(customerSites, is(not(nullValue())));
@@ -108,7 +108,7 @@ public class CustomerSiteRepositoryTest {
 	
 	
 	@Test
-	public void existingCustomerSiteMayBeSelectedById() throws Exception {
+	public void existingCustomerSiteMayBeSelectedById() {
 		CustomerSite customerSite = repository.selectById(1L);
 		assertThat(customerSite, is(not(nullValue())));
 		assertCustomerSite(customerSite);
@@ -117,7 +117,31 @@ public class CustomerSiteRepositoryTest {
 		assertThat(customerSite, is(nullValue()));		
 	}
 	
+			
+	@Test
+	public void existingCustomerSiteMayBeSelectedByContractNum() {
+		CustomerSite customerSite = repository.selectByContractNum(1L, "001");
+		assertThat(customerSite, is(not(nullValue())));
+		assertCustomerSite(customerSite);
+	}
+	
+
+	@Test
+	public void theListCustomerSitesMayBeCustomerId() {	
+		List<CustomerSite> customerSites = repository.selectByCustomerId(1L);
 		
+		assertThat(customerSites, is(not(nullValue())));
+		assertThat(customerSites, is(not(empty())));
+		assertThat(customerSites, hasSize(1));
+		
+		assertThat(customerSites.get(0), is(not(nullValue())));
+		assertThat(customerSites.get(0).getCustomer(), is(not(nullValue())));
+		assertThat(customerSites.get(0).getId(), is(equalTo(1L)));
+		assertThat(customerSites.get(0).getCustomer().getId(), is(equalTo(1L)));
+		assertCustomerSite(customerSites.get(0));
+	}
+	
+
 	@Test
 	public void newCustomerSiteMayBeInserted() {
 		CustomerSite origCustomerSite = newCustomerSite(null);

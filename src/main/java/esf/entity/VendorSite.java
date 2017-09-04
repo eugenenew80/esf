@@ -12,8 +12,8 @@ import lombok.EqualsAndHashCode;
 
 @NamedQueries({
 	@NamedQuery(name= "VendorSite.findAll", 		  query="select t from VendorSite t"),
-	@NamedQuery(name= "VendorSite.findByVendor", 	  query="select t from VendorSite t where t.vendor=:vendor"),
-	@NamedQuery(name= "VendorSite.findByContractNum", query="select t from VendorSite t where t.contractNum=:contractNum"),
+	@NamedQuery(name= "VendorSite.findByVendorId", 	  query="select t from VendorSite t where t.vendor.id=:vendorId"),
+	@NamedQuery(name= "VendorSite.findByContractNum", query="select t from VendorSite t where t.vendor.id=:vendorId and t.contractNum=:contractNum"),
 })
 @Entity
 @Data
