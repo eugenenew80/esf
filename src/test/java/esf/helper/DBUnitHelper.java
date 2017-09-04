@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import esf.entity.Company;
 import esf.entity.Customer;
+import esf.entity.CustomerSite;
 import esf.entity.Vendor;
 import esf.entity.VendorSite;
 
@@ -85,5 +86,6 @@ public class DBUnitHelper {
 		em.getEntityManagerFactory().getCache().evict(Customer.class);
 		em.getEntityManagerFactory().getCache().evict(Vendor.class);
 		em.getEntityManagerFactory().getCache().evict(VendorSite.class);
+		em.getEntityManagerFactory().getCache().evict(CustomerSite.class);
 	}
 }

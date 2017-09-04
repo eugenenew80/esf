@@ -26,6 +26,7 @@ import esf.webapi.integration.*;
 	VendorResourceIntTest.class,
 	
 	VendorSiteRepositoryTest.class,
+	VendorSiteServiceTest.class,
 	
 	CustomerSiteRepositoryTest.class,
 })
