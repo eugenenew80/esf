@@ -12,6 +12,9 @@ import esf.entity.dto.CustomerSiteDto;
 import esf.service.CustomerSiteService;
 
 @RequestScoped
+@Path("/")
+@Produces({ "application/xml", "application/json" })
+@Consumes({ "application/xml", "application/json" })
 public class CustomerSiteResourceImpl {
 		
 	public CustomerSiteResourceImpl() {
