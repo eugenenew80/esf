@@ -13,6 +13,8 @@ import esf.entity.dto.VendorSiteDto;
 import esf.service.VendorSiteService;
 
 @RequestScoped
+@Produces({ "application/xml", "application/json" })
+@Consumes({ "application/xml", "application/json" })
 public class VendorSiteResourceImpl {
 		
 	public VendorSiteResourceImpl() {
