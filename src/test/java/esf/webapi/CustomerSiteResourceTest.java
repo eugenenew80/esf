@@ -110,7 +110,7 @@ public class CustomerSiteResourceTest extends AbstractResourceTest {
 		when().
 			get("1").
 		then().
-			log().all().
+			//log().all().
             contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
