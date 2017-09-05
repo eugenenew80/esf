@@ -1,5 +1,8 @@
 package esf.webapi.helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -19,6 +22,13 @@ public class AbstractResourceTest {
 	private static Server server = null;
 	private static AbstractBinder binder;
 	private static Object resource;
+	private static List<Object> resources = new ArrayList<>();
+	
+	
+	protected static void addResource(Object resource) {
+		resources.add(resource);
+	}
+
 	
 	protected static void setBinder(AbstractBinder binder) {
 		AbstractResourceTest.binder = binder;
@@ -31,7 +41,12 @@ public class AbstractResourceTest {
 	protected static void start(Binding binding) throws Exception {
 		ResourceConfig config = new ResourceConfig();
 		config.register(binder);
-		config.register(resource);
+		
+		if (resources.size()>0) 
+			for (Object r : resources)
+				config.register(r);
+		else
+			config.register(resource);
 		
 		config.register(RepositryNotFoundExceptionMapperImpl.class);
 		config.register(EntityNotFoundExceptionMapperImpl.class);

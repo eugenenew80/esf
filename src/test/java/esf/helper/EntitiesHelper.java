@@ -305,7 +305,7 @@ public final class EntitiesHelper {
 				body.put("contractNum", vendorSite.getContractNum());
 			
 			if (vendorSite.getContractDate()!=null)
-				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd").format(vendorSite.getContractDate()));
+				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(vendorSite.getContractDate()));
 			
 			if (vendorSite.getVendor()!=null)
 				body.put("vendorId", vendorSite.getVendor().getId());
@@ -368,7 +368,7 @@ public final class EntitiesHelper {
 				body.put("contractNum", customerSite.getContractNum());
 			
 			if (customerSite.getContractDate()!=null)
-				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd").format(customerSite.getContractDate()));
+				body.put("contractDate", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(customerSite.getContractDate()));
 			
 			if (customerSite.getCustomer()!=null)
 				body.put("customerId", customerSite.getCustomer().getId());

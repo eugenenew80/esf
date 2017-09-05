@@ -25,7 +25,6 @@ import esf.common.repository.query.MyQueryParam;
 import esf.common.repository.query.Query;
 import esf.common.repository.query.QueryImpl;
 import esf.entity.CustomerSite;
-import esf.entity.CustomerSite;
 import esf.helper.DBUnitHelper;
 import esf.helper.DataSetLoader;
 import static esf.helper.EntitiesHelper.*;

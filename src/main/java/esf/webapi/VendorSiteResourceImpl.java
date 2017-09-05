@@ -58,6 +58,8 @@ public class VendorSiteResourceImpl {
 	@PUT 
 	@Path("{id : \\d+}") 
 	public Response update(@PathParam("id") Long id, VendorSiteDto vendorSiteDto ) {
+		System.out.println(vendorSiteDto);
+		
 		VendorSite newVendorSite = vendorSiteService.update(mapper.map(vendorSiteDto, VendorSite.class)); 
 		return Response.ok()
 			.entity(mapper.map(newVendorSite, VendorSiteDto.class))

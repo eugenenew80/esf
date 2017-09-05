@@ -6,5 +6,10 @@
   <mapping>
     <class-a>esf.entity.VendorSite</class-a>
     <class-b>esf.entity.dto.VendorSiteDto</class-b>
+    
+	<field>
+	  <a>vendor.id</a>
+	  <b>vendorId</b>
+	</field>          
   </mapping> 
 </mappings> 

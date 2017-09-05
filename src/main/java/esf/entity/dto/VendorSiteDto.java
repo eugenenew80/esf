@@ -1,8 +1,6 @@
 package esf.entity.dto;
 
 import java.util.Date;
-
-import esf.entity.Vendor;
 import lombok.Data;
 
 @Data
@@ -13,5 +11,5 @@ public class VendorSiteDto {
 	private String destination;
 	private String exerciseWay;
 	private String term;
-	private Vendor vendor;
+	private Long vendorId;
 }
