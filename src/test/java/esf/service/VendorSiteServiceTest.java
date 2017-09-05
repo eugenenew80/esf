@@ -83,6 +83,22 @@ public class VendorSiteServiceTest {
 		assertVendorSite(vendorSites.get(0));		
 	}	
 	
+
+	@Test
+	public void theListVendorSitesMayBeFoundVendorId() {
+		when(mockRepository.selectByVendorId(1L))
+			.thenReturn(Arrays.asList(newVendorSite(1L)));
+		
+		List<VendorSite> vendorSites = service.findByVendorId(1L);	
+		
+		verify(mockRepository, times(1)).selectByVendorId(1L);		
+		assertThat(vendorSites, is(not(nullValue())));
+		assertThat(vendorSites, is(not(empty())));
+		assertThat(vendorSites, hasSize(1));
+		assertThat(vendorSites.get(0).getId(), is(equalTo(1L)));
+		assertVendorSite(vendorSites.get(0));		
+	}
+	
 	
 	@Test
 	public void existingVendorSiteMayBeFoundById() {
@@ -92,6 +108,19 @@ public class VendorSiteServiceTest {
 		VendorSite vendorSites = service.findById(1L);		
 		
 		verify(mockRepository, times(1)).selectById(1L);
+		assertThat(vendorSites, is(not(nullValue())));
+		assertVendorSite(vendorSites);
+	}
+	
+
+	@Test
+	public void existingVendorSiteMayBeFoundByContractNum() {
+		when(mockRepository.selectByContractNum(1L, VENDOR_SITE_NUM))
+			.thenReturn(newVendorSite(1L));		
+		
+		VendorSite vendorSites = service.findByContractNum(1L, VENDOR_SITE_NUM);		
+		
+		verify(mockRepository, times(1)).selectByContractNum(1L, VENDOR_SITE_NUM);
 		assertThat(vendorSites, is(not(nullValue())));
 		assertVendorSite(vendorSites);
 	}
@@ -241,6 +270,13 @@ public class VendorSiteServiceTest {
 		service.find(QueryImpl.builder().build());	
 	}
 	
+
+	@Test(expected=RepositoryNotFoundException.class)
+	public void failMethodFindByVendorIdIfRepositoryIsNull() {		
+		service.setRepository(null);
+		service.findByVendorId(1L);	
+	}
+	
 	
 	@Test(expected=RepositoryNotFoundException.class)
 	public void failMethodFindByIdIfRepositoryIsNull() {		
@@ -249,6 +285,13 @@ public class VendorSiteServiceTest {
 	}
 
 
+	@Test(expected=RepositoryNotFoundException.class)
+	public void failMethodFindByContractNumIfRepositoryIsNull() {		
+		service.setRepository(null);
+		service.findByContractNum(1L, VENDOR_SITE_NUM);		
+	}
+
+	
 	@Test(expected=RepositoryNotFoundException.class)
 	public void failMethodFindByNameIfRepositoryIsNull() {		
 		service.setRepository(null);
@@ -278,6 +321,24 @@ public class VendorSiteServiceTest {
 
 	
 	//Call with invalid arguments
+
+	@Test(expected=InvalidArgumentException.class)
+	public void failMethodFindByVendorIdIfVendorIdIsNull() {		
+		service.findByVendorId(null);		
+	}
+
+
+	@Test(expected=InvalidArgumentException.class)
+	public void failMethodFindByContractNumIfVendorIdIsNull() {		
+		service.findByContractNum(null, VENDOR_SITE_NUM);		
+	}
+
+
+	@Test(expected=InvalidArgumentException.class)
+	public void failMethodFindByContractNumIfContractNumIsNull() {		
+		service.findByContractNum(1L, null);		
+	}
+
 	
 	@Test(expected=InvalidArgumentException.class)
 	public void failMethodFindByIdIfVendorSiteIdIsNull() {		
@@ -330,6 +391,15 @@ public class VendorSiteServiceTest {
 			.thenReturn(null);		
 		
 		service.findById(1L);
+	}
+
+
+	@Test(expected = EntityNotFoundException.class)
+	public void failMethodFindByContractNumIfVendorSiteIsNotExist() {		
+		when(mockRepository.selectByContractNum(anyLong(), anyString()))
+			.thenReturn(null);		
+		
+		service.findByContractNum(1L, VENDOR_SITE_NUM);
 	}
 
 	

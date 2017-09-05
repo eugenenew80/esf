@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import org.dozer.DozerBeanMapper;
-import esf.common.repository.query.*;
 import esf.entity.VendorSite;
 import esf.entity.dto.VendorSiteDto;
 import esf.service.VendorSiteService;
@@ -24,11 +23,7 @@ public class VendorSiteResourceImpl {
 
 	@GET
 	public Response getAll(@PathParam("vendorId") Long vendorId) {
-		Query query = QueryImpl.builder()
-			.setParameter("vendor.id", new MyQueryParam("vendorId", vendorId, ConditionType.EQUALS))
-			.build();		
-		
-		List<VendorSiteDto> list = vendorSiteService.find(query)
+		List<VendorSiteDto> list = vendorSiteService.findByVendorId(vendorId)
 			.stream()
 			.map( it-> mapper.map(it, VendorSiteDto.class) )
 			.collect(Collectors.toList());

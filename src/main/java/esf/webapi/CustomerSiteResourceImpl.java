@@ -2,13 +2,11 @@ package esf.webapi;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import org.dozer.DozerBeanMapper;
-import esf.common.repository.query.*;
 import esf.entity.CustomerSite;
 import esf.entity.dto.CustomerSiteDto;
 import esf.service.CustomerSiteService;
@@ -24,11 +22,7 @@ public class CustomerSiteResourceImpl {
 
 	@GET
 	public Response getAll(@PathParam("customerId") Long customerId) {
-		Query query = QueryImpl.builder()
-			.setParameter("customer.id", new MyQueryParam("customerId", customerId, ConditionType.EQUALS))
-			.build();		
-		
-		List<CustomerSiteDto> list = customerSiteService.find(query)
+		List<CustomerSiteDto> list = customerSiteService.findByCustomerId(customerId)
 			.stream()
 			.map( it-> mapper.map(it, CustomerSiteDto.class) )
 			.collect(Collectors.toList());

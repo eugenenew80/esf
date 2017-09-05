@@ -4,6 +4,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.validation.constraints.NotNull;
+
 import esf.common.entity.HasId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,10 +20,17 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(of= {"id"})
 public class CustomerSite implements HasId {
 	private Long id;
+	
+	@NotNull
 	private Date contractDate;
+	
+	@NotNull
 	private String contractNum;
+		
+	@NotNull
+	private Customer customer;
+	
 	private String destination;
 	private String exerciseWay;
 	private String term;
-	private Customer customer;
 }
