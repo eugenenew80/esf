@@ -19,26 +19,31 @@ import esf.common.webapi.exception.WebApplicationExceptionMapperImpl;
 
 
 public class AbstractResourceTest {
-	private static Server server = null;
-	private static AbstractBinder binder;
-	private static Object resource;
-	private static List<Object> resources = new ArrayList<>();
+	private Server server = null;
+	private AbstractBinder binder;
+	private Object resource;
+	private List<Object> resources = new ArrayList<>();
 	
 	
-	protected static void addResource(Object resource) {
+	protected void clearResource() {
+		resources.clear();
+	}
+	
+	
+	protected void addResource(Object resource) {
 		resources.add(resource);
 	}
 
 	
-	protected static void setBinder(AbstractBinder binder) {
-		AbstractResourceTest.binder = binder;
+	protected void setBinder(AbstractBinder binder) {
+		this.binder = binder;
 	}
 	
-	protected static void setResource(Object resource) {
-		AbstractResourceTest.resource = resource;
+	protected void setResource(Object resource) {
+		this.resource = resource;
 	}
 	
-	protected static void start(Binding binding) throws Exception {
+	protected void start(Binding binding) throws Exception {
 		ResourceConfig config = new ResourceConfig();
 		config.register(binder);
 		
@@ -66,7 +71,7 @@ public class AbstractResourceTest {
 	}
 	
 	
-	protected static void stop() throws Exception {
+	protected void stop() throws Exception {
 		server.stop();
 	}
 }

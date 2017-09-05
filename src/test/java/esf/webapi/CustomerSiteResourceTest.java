@@ -15,7 +15,7 @@ import java.util.TimeZone;
 
 import com.jayway.restassured.http.ContentType;
 
-import esf.webapi.VendorSiteResourceImpl;
+import esf.webapi.CustomerSiteResourceImpl;
 import esf.webapi.helper.AbstractResourceTest;
 import esf.webapi.helper.Binding;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
@@ -28,40 +28,40 @@ import com.jayway.restassured.RestAssured;
 import esf.common.exception.EntityNotFoundException;
 import esf.common.exception.InvalidArgumentException;
 import esf.common.exception.RepositoryNotFoundException;
-import esf.entity.VendorSite;
-import esf.service.VendorService;
-import esf.service.VendorSiteService;
+import esf.entity.CustomerSite;
+import esf.service.CustomerService;
+import esf.service.CustomerSiteService;
 import static esf.helper.EntitiesHelper.*;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class VendorSiteResourceTest extends AbstractResourceTest {
-	VendorService vendorService = null;
-	VendorSiteService service = null;
+public class CustomerSiteResourceTest extends AbstractResourceTest {
+	CustomerService customerService = null;
+	CustomerSiteService service = null;
 	
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		RestAssured.baseURI = "http://localhost:2222/esf/webapi/";
-        RestAssured.basePath = "/vendor/1/vendorSite/";
+        RestAssured.basePath = "/customer/1/customerSite/";
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	}
 
 	
 	@Before
 	public void setUp() throws Exception {
-		vendorService = mock(VendorService.class);
-        service = mock(VendorSiteService.class);
+		customerService = mock(CustomerService.class);
+        service = mock(CustomerSiteService.class);
 		setBinder(new AbstractBinder() {
 			protected void configure() {
-				bind(vendorService).to(VendorService.class);
-				bind(service).to(VendorSiteService.class);
+				bind(customerService).to(CustomerService.class);
+				bind(service).to(CustomerSiteService.class);
 			}
 		});
 
 		clearResource();
-		addResource(new VendorResourceImpl());
-		addResource(new VendorSiteResourceImpl());
+		addResource(new CustomerResourceImpl());
+		addResource(new CustomerSiteResourceImpl());
 		start(Binding.Manual);
 	}
 	
@@ -75,9 +75,9 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 	//Success cases
 	
 	@Test
-	public void theListVendorSitesMayBeFound() {
-		when(service.findByVendorId(anyLong()))
-			.thenReturn(Arrays.asList(newVendorSite(1L)));
+	public void theListCustomerSitesMayBeFound() {
+		when(service.findByCustomerId(anyLong()))
+			.thenReturn(Arrays.asList(newCustomerSite(1L)));
 		
 		given().
 			//log().all().
@@ -92,16 +92,16 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			body("[0].id", is(not(nullValue()))).
 			body("[0].contractNum", is(not(nullValue()))).
 			body("[0].contractDate", is(not(nullValue()))).
-			body("[0].vendorId", is(not(nullValue())));
+			body("[0].customerId", is(not(nullValue())));
 	
-		verify(service, times(1)).findByVendorId(anyLong());
+		verify(service, times(1)).findByCustomerId(anyLong());
 	}
 	
 	
 	@Test
-	public void existingVendorSiteMayBeFoundById() {
+	public void existingCustomerSiteMayBeFoundById() {
 		when(service.findById(1L))
-			.thenReturn(newVendorSite(1L));	
+			.thenReturn(newCustomerSite(1L));	
 		
 		given().
 			//log().all().
@@ -114,43 +114,43 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
             contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
-			body("contractNum", is(equalTo(VENDOR_SITE_NUM))).
-			body("contractDate", is(equalTo( new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(VENDOR_SITE_DATE)  ))).
-			body("vendorId", is(equalTo(1)));
+			body("contractNum", is(equalTo(CUSTOMER_SITE_NUM))).
+			body("contractDate", is(equalTo( new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(CUSTOMER_SITE_DATE)  ))).
+			body("customerId", is(equalTo(1)));
 	
 		verify(service, times(1)).findById(1L);
 	}
 
 	
 	@Test
-	public void newVendorSiteMayBeCreated() {
-		VendorSite origVendorSite = newVendorSite(null);
-		when(service.create(origVendorSite))
-			.thenReturn(newVendorSite(1L));	
+	public void newCustomerSiteMayBeCreated() {
+		CustomerSite origCustomerSite = newCustomerSite(null);
+		when(service.create(origCustomerSite))
+			.thenReturn(newCustomerSite(1L));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
+			body(customerSiteToJson(origCustomerSite)).
 			post().
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(not(nullValue()))).
-			body("contractNum", is(equalTo(VENDOR_SITE_NUM))).
-			body("contractDate", is(equalTo( new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(VENDOR_SITE_DATE)  ))).
-			body("vendorId", is(equalTo(1)));	
+			body("contractNum", is(equalTo(CUSTOMER_SITE_NUM))).
+			body("contractDate", is(equalTo( new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(CUSTOMER_SITE_DATE)  ))).
+			body("customerId", is(equalTo(1)));	
 		
 		verify(service, times(1)).create(anyObject());
 	}
 	
 	
 	@Test
-	public void existingVendorSiteMayBeUpdated()  {
-		VendorSite origVendorSite = newVendorSite(1L);				
+	public void existingCustomerSiteMayBeUpdated()  {
+		CustomerSite origCustomerSite = newCustomerSite(1L);				
 		when(service.update(anyObject()))
 			.then(returnsFirstArg());
 		
@@ -159,24 +159,24 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
-			put(origVendorSite.getId().toString()).
+			body(customerSiteToJson(origCustomerSite)).
+			put(origCustomerSite.getId().toString()).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
 			and().statusCode(200).
 			body("id", is(equalTo(1))).
-			body("contractNum", is(equalTo(VENDOR_SITE_NUM))).
-			body("contractDate", is(equalTo( new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(VENDOR_SITE_DATE)  ))).
-			body("vendorId", is(equalTo(1)));
+			body("contractNum", is(equalTo(CUSTOMER_SITE_NUM))).
+			body("contractDate", is(equalTo( new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").format(CUSTOMER_SITE_DATE)  ))).
+			body("customerId", is(equalTo(1)));
 		
 		verify(service, times(1)).update(anyObject());
 	}	
 	
 	
 	@Test
-	public void existingVendorSiteMayBeDeleted() {
-		VendorSite origVendorSite = newVendorSite(1L);		
+	public void existingCustomerSiteMayBeDeleted() {
+		CustomerSite origCustomerSite = newCustomerSite(1L);		
 		when(service.delete(anyLong()))
 			.thenReturn(true);		
 
@@ -185,7 +185,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			delete(origVendorSite.getId().toString()).
+			delete(origCustomerSite.getId().toString()).
 		then().
 			//log().all().
 			and().statusCode(204);
@@ -198,7 +198,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 	//Fail cases - Entity not found Exception
 
 	@Test
-	public void failMethodFindByIdIfVendorSiteIdIsNotExist() {
+	public void failMethodFindByIdIfCustomerSiteIdIsNotExist() {
 		when(service.findById(anyLong()))
 			.thenThrow(new EntityNotFoundException(1L));	
 		
@@ -221,8 +221,8 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 
 
 	@Test
-	public void failMethodUpdateIfVendorSiteIdIsNotExist() {
-		VendorSite origVendorSite = newVendorSite(1L);
+	public void failMethodUpdateIfCustomerSiteIdIsNotExist() {
+		CustomerSite origCustomerSite = newCustomerSite(1L);
 		when(service.update(anyObject()))
 			.thenThrow(new EntityNotFoundException(1L));		
 		
@@ -231,8 +231,8 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
-			put(origVendorSite.getId().toString()).
+			body(customerSiteToJson(origCustomerSite)).
+			put(origCustomerSite.getId().toString()).
 		then().
 			//log().all().
             contentType(ContentType.JSON).
@@ -246,8 +246,8 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 	
 
 	@Test
-	public void failMethodDeleteIfVendorSiteIdIsNotExist() {
-		VendorSite origVendorSite = newVendorSite(1L);		
+	public void failMethodDeleteIfCustomerSiteIdIsNotExist() {
+		CustomerSite origCustomerSite = newCustomerSite(1L);		
 		when(service.delete(anyLong()))
 			.thenThrow(new EntityNotFoundException(1L));		
 
@@ -256,7 +256,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			delete(origVendorSite.getId().toString()).
+			delete(origCustomerSite.getId().toString()).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).
@@ -272,17 +272,17 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 	//Fail cases - Invalid Argument Exception
 	
 	@Test
-	public void failMethodCreateIfVendorSiteIdIsNotNull() {		
-		VendorSite origVendorSite = newVendorSite(1L);
+	public void failMethodCreateIfCustomerSiteIdIsNotNull() {		
+		CustomerSite origCustomerSite = newCustomerSite(1L);
 		when(service.create(anyObject()))
-			.thenThrow(new InvalidArgumentException(origVendorSite));	
+			.thenThrow(new InvalidArgumentException(origCustomerSite));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
+			body(customerSiteToJson(origCustomerSite)).
 			post().
 		then().
 			//log().all().
@@ -297,17 +297,17 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 		
 
 	@Test
-	public void failMethodUpdateIfVendorSiteIdIsNull() {		
-		VendorSite origVendorSite = newVendorSite(null);		
+	public void failMethodUpdateIfCustomerSiteIdIsNull() {		
+		CustomerSite origCustomerSite = newCustomerSite(null);		
 		when(service.update(anyObject()))
-			.thenThrow(new InvalidArgumentException(origVendorSite));	
+			.thenThrow(new InvalidArgumentException(origCustomerSite));	
 		
 		given().
 			//log().all().
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
+			body(customerSiteToJson(origCustomerSite)).
 			put("1").
 		then().
 			//log().all().
@@ -325,7 +325,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 	
 	@Test
 	public void failMethodGetAllIfRepositoryIsNull() {		
-		when(service.findByVendorId(anyLong()))
+		when(service.findByCustomerId(anyLong()))
 			.thenThrow(new RepositoryNotFoundException());						
 		
 		given().
@@ -367,7 +367,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 	
 	@Test
 	public void failMethodCreateIfRepositoryIsNull() {		
-		VendorSite origVendorSite = newVendorSite(null);
+		CustomerSite origCustomerSite = newCustomerSite(null);
 		when(service.create(anyObject()))
 			.thenThrow(new RepositoryNotFoundException());						
 		
@@ -376,7 +376,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
+			body(customerSiteToJson(origCustomerSite)).
 			post().
 		then().
 			//log().all().
@@ -390,7 +390,7 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 
 	@Test
 	public void failMethodUpdateIfRepositoryIsNull() {		
-		VendorSite origVendorSite = newVendorSite(1L);
+		CustomerSite origCustomerSite = newCustomerSite(1L);
 		when(service.update(anyObject()))
 			.thenThrow(new RepositoryNotFoundException());						
 		
@@ -399,8 +399,8 @@ public class VendorSiteResourceTest extends AbstractResourceTest {
 			accept("application/json; charset=utf-8").
 			contentType("application/json; charset=utf-8").
 		when().			
-			body(vendorSiteToJson(origVendorSite)).
-			put(origVendorSite.getId().toString()).
+			body(customerSiteToJson(origCustomerSite)).
+			put(origCustomerSite.getId().toString()).
 		then().
 			//log().all().
 	        contentType(ContentType.JSON).

@@ -6,5 +6,10 @@
   <mapping>
     <class-a>esf.entity.CustomerSite</class-a>
     <class-b>esf.entity.dto.CustomerSiteDto</class-b>
+    
+	<field>
+	  <a>customer.id</a>
+	  <b>customerId</b>
+	</field>    
   </mapping> 
 </mappings> 

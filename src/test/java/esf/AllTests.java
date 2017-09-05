@@ -31,5 +31,6 @@ import esf.webapi.integration.*;
 	
 	CustomerSiteRepositoryTest.class,
 	CustomerSiteServiceTest.class,
+	CustomerSiteResourceTest.class
 })
 public class AllTests { }
