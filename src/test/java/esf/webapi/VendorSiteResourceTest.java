@@ -35,14 +35,14 @@ import static esf.helper.EntitiesHelper.*;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class VendorSiteResourceTest extends AbstractResourceTest {
+public class VendorSiteResourceTest extends AbstractResourceTest { 
 	VendorService vendorService = null;
 	VendorSiteService service = null;
 	
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-		RestAssured.baseURI = "http://localhost:2222/esf/webapi/";
+		RestAssured.baseURI = "http://localhost:2222/esf/webapi/"; 
         RestAssured.basePath = "/vendor/1/vendorSite/";
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	}

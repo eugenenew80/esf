@@ -36,7 +36,7 @@ public class VendorSiteRepositoryTest {
 	private static DBUnitHelper dbUnitHelper;
 	private List<DataSetLoader> dataSetList = Arrays.asList(new DataSetLoader("apps", "xx_ap_vendor_site.xml"));
 	
-
+ 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
